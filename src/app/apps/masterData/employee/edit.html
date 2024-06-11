@@ -1,0 +1,287 @@
+<div>
+    <div class="flex flex-col gap-2.5 xl:flex-row">
+        <div class="panel flex-1 px-0 py-6 ltr:xl:mr-6 rtl:xl:ml-6">
+            <div class="flex flex-wrap justify-center px-4">
+                <div class="text-lg">ADD EMPLOYEE</div>
+            </div>
+            <hr class="my-6 border-[#e0e6ed] dark:border-[#1b2e4b]" />
+            <div class="mt-8 px-4">
+                <div class="grid grid-cols-1 gap-6">
+                    <!-- Baris Pertama: Unit, PBN, Pendidikan -->
+                    <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div class="lg:w-1/4">
+                            <label for="id_unit" class="mb-0">Unit</label>
+                            <select id="id_unit" class="form-select flex-1" style="width: 95%" [(ngModel)]="params.id_unit">
+                                <option *ngFor="let unit of unitList" [value]="unit.id">{{unit.code}} - {{unit.name}}</option>
+                            </select>
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="id_pbn" class="mb-0">PBN</label>
+                            <select id="id_pbn" class="form-select flex-1" style="width: 95%" [(ngModel)]="params.id_pbn">
+                                <option *ngFor="let pbn of pbnList" [value]="pbn.id">{{pbn.kode}}</option>
+                            </select>
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="id_pendidikan" class="mb-0">Pendidikan</label>
+                            <select id="id_pendidikan" class="form-select flex-1" style="width: 95%" [(ngModel)]="params.id_pendidikan">
+                                <option *ngFor="let pendidikan of pendidikanList" [value]="pendidikan.id">{{pendidikan.nama}}</option>
+                            </select>
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="id_status" class="mb-0">Status</label>
+                            <select id="id_status" class="form-select flex-1" style="width: 95%" [(ngModel)]="params.id_status">
+                                <option *ngFor="let status of statusList" [value]="status.id">{{status.kode}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Kolom Lainnya -->
+                    <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div class="lg:w-1/4">
+                            <label for="nik">NIK</label>
+                            <input id="nik" type="text" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.nik" placeholder="Enter NIK" />
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="nama_lengkap">Nama Lengkap</label>
+                            <input
+                                id="nama_lengkap"
+                                type="text"
+                                class="form-input flex-1"
+                                style="width: 95%"
+                                [(ngModel)]="params.nama_lengkap"
+                                placeholder="Enter Nama Lengkap"
+                            />
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="nama_panggilan">Nama Panggilan</label>
+                            <input
+                                id="nama_panggilan"
+                                type="text"
+                                class="form-input flex-1"
+                                style="width: 95%"
+                                [(ngModel)]="params.nama_panggilan"
+                                placeholder="Enter Nama Panggilan"
+                            />
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="jenis_kelamin">Jenis Kelamin</label>
+                            <select id="jenis_kelamin" class="form-select flex-1" style="width: 95%" [(ngModel)]="params.jenis_kelamin">
+                                <option value="1">Laki-laki</option>
+                                <option value="2">Perempuan</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Baris Berikutnya -->
+                    <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div class="lg:w-1/4">
+                            <label for="tempat_lahir">Tempat Lahir</label>
+                            <input
+                                id="tempat_lahir"
+                                type="text"
+                                class="form-input flex-1"
+                                style="width: 95%"
+                                [(ngModel)]="params.tempat_lahir"
+                                placeholder="Enter Tempat Lahir"
+                            />
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="tanggal_lahir">Tanggal Lahir</label>
+                            <input id="tanggal_lahir" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.tanggal_lahir" />
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="segmen">Segmen</label>
+                            <input
+                                id="segmen"
+                                type="number"
+                                class="form-input flex-1"
+                                style="width: 95%"
+                                [(ngModel)]="params.segmen"
+                                placeholder="Enter Segmen"
+                            />
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="kampus">Kampus</label>
+                            <input
+                                id="kampus"
+                                type="text"
+                                class="form-input flex-1"
+                                style="width: 95%"
+                                [(ngModel)]="params.kampus"
+                                placeholder="Enter Kampus"
+                            />
+                        </div>
+                    </div>
+                    <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div class="lg:w-1/4">
+                            <label for="pekerjaan">Pekerjaan</label>
+                            <input
+                                id="pekerjaan"
+                                type="text"
+                                class="form-input flex-1"
+                                style="width: 95%"
+                                [(ngModel)]="params.pekerjaan"
+                                placeholder="Enter Pekerjaan"
+                            />
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="profesi">Profesi</label>
+                            <input
+                                id="profesi"
+                                type="text"
+                                class="form-input flex-1"
+                                style="width: 95%"
+                                [(ngModel)]="params.profesi"
+                                placeholder="Enter Profesi"
+                            />
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="ket_profesi">Keterangan Profesi</label>
+                            <input
+                                id="ket_profesi"
+                                type="text"
+                                class="form-input flex-1"
+                                style="width: 95%"
+                                [(ngModel)]="params.ket_profesi"
+                                placeholder="Enter Keterangan Profesi"
+                            />
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="penghasilan">Penghasilan</label>
+                            <input
+                                id="penghasilan"
+                                type="text"
+                                class="form-input flex-1"
+                                style="width: 95%"
+                                [(ngModel)]="params.penghasilan"
+                                placeholder="Enter Penghasilan"
+                            />
+                        </div>
+                    </div>
+                    <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div class="lg:w-1/4">
+                            <label for="status_nikah">Status Nikah</label>
+                            <select id="status_nikah" class="form-select flex-1" style="width: 95%" [(ngModel)]="params.status_nikah">
+                                <option value="1">Single</option>
+                                <option value="2">Married</option>
+                            </select>
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="status_aktif">Status Aktif</label>
+                            <select id="status_aktif" class="form-select flex-1" style="width: 95%" [(ngModel)]="params.status_aktif">
+                                <option value="1">Active</option>
+                                <option value="2">Pasive</option>
+                            </select>
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="no_hp">No HP</label>
+                            <input id="no_hp" type="text" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.no_telp" placeholder="Enter No HP" />
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="alamat">Alamat</label>
+                            <textarea
+                                id="alamat"
+                                type="text"
+                                class="form-input flex-1"
+                                style="width: 95%"
+                                [(ngModel)]="params.alamat"
+                                placeholder="Enter Alamat"
+                            ></textarea>
+                        </div>
+                    </div>
+                    <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div class="lg:w-1/4">
+                          <label for="provinsi">Provinsi</label>
+                          <select
+                            id="provinsi"
+                            class="form-select flex-1"
+                            style="width: 95%"
+                            [(ngModel)]="params.provinsi"
+                            (change)="onProvinsiChange(params.provinsi)"
+                          >
+                            <option *ngFor="let provinsi of provinsiList" [value]="provinsi.id">{{ provinsi.nama }}</option>
+                          </select>
+                        </div>
+                        <div class="lg:w-1/4">
+                          <label for="kabupaten">Kabupaten</label>
+                          <select
+                            id="kabupaten"
+                            class="form-select flex-1"
+                            style="width: 95%"
+                            [(ngModel)]="params.kabupaten"
+                            (change)="onKabupatenChange(params.kabupaten)"
+                            [disabled]="!params.provinsi"
+                          >
+                            <option *ngFor="let kabupaten of kabupatenList" [value]="kabupaten.id">{{ kabupaten.nama }}</option>
+                          </select>
+                        </div>
+                        <div class="lg:w-1/4">
+                          <label for="kecamatan">Kecamatan</label>
+                          <select
+                            id="kecamatan"
+                            class="form-select flex-1"
+                            style="width: 95%"
+                            [(ngModel)]="params.kecamatan"
+                            (change)="onKecamatanChange(params.kecamatan)"
+                            [disabled]="!params.kabupaten"
+                          >
+                            <option *ngFor="let kecamatan of kecamatanList" [value]="kecamatan.id">{{ kecamatan.nama }}</option>
+                          </select>
+                        </div>
+                        <div class="lg:w-1/4">
+                          <label for="desa">Desa</label>
+                          <select
+                            id="desa"
+                            class="form-select flex-1"
+                            style="width: 95%"
+                            [(ngModel)]="params.desa"
+                            [disabled]="!params.kecamatan"
+                          >
+                            <option *ngFor="let desa of desaList" [value]="desa.id">{{ desa.nama }}</option>
+                          </select>
+                        </div>
+                      </div>>
+                    <div class="mb-4 flex flex-col lg:flex-row lg:items-center">
+                        <div class="lg:w-1/4">
+                            <div class="flex">
+                                <button type="button" class="btn btn-outline-success ltr:rounded-r-none rtl:rounded-l-none" (click)="openModal()">
+                                    <icon-camera class="shrink-0 ltr:mr-2 rtl:ml-2" />Foto
+                                </button>
+                                <input
+                                    id="addonsLeftoutline"
+                                    type="text"
+                                    placeholder=""
+                                    class="form-input ltr:rounded-l-none rtl:rounded-r-none"
+                                    [(ngModel)]="params.foto"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+                    <modal #modal2>
+                        <ng-template #modalHeader>
+                            <div>Upload Foto</div>
+                        </ng-template>
+                        <ng-template #modalBody>
+                            <div class="custom-file-container" data-upload-id="myFirstImage"></div>
+                        </ng-template>
+                        <ng-template #modalFooter>
+                            <button type="button" (click)="modal2.close()" class="btn btn-outline-danger">Discard</button>
+                            <button type="submit" (click)="onUpload()" class="btn btn-primary ltr:ml-4 rtl:mr-4">Upload</button>
+                        </ng-template>
+                    </modal>
+                    <div class="mt-8 flex flex-wrap justify-center justify-center px-4">
+                        <button routerLink="/apps/masterData/employee/list" type="button" class="btn btn-outline-dark gap-2">
+                            <icon-arrow-backward class="shrink-0 ltr:mr-2 rtl:ml-2" />
+                            Cancel
+                        </button>
+                        <span class="mx-4"></span>
+                        <button type="button" class="btn btn-info gap-2" (click)="save()">
+                            <icon-edit class="shrink-0 ltr:mr-2 rtl:ml-2" />
+                            Update
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
