@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
     moduleId: module.id,
     templateUrl: './list.html',
 })
-export class EmployeeListComponent {
+export class StudentListComponent {
     members: any[] = [];
     member: any = {};
     pbn: any[] = [];
@@ -141,11 +141,11 @@ export class EmployeeListComponent {
     ];
 
     ngOnInit(): void {
-        this.getEmployees();
+        this.getMembers();
     }
 
-    getEmployees(): void {
-        this.dataMasterService.getEmployees().subscribe(
+    getMembers(): void {
+        this.dataMasterService.getMembers().subscribe(
             (data) => {
                 this.members = data;
                 console.log(this.members);
@@ -287,10 +287,10 @@ export class EmployeeListComponent {
             padding: '2em',
         }).then((result) => {
             if (result.isConfirmed) {
-                this.dataMasterService.deleteEmployee(id).subscribe(
+                this.dataMasterService.deleteMember(id).subscribe(
                     () => {
                         swalWithBootstrapButtons.fire('Deleted!', 'Your file has been deleted.', 'success');
-                        this.getEmployees();
+                        this.getMembers();
                     },
                     (error) => {
                         swalWithBootstrapButtons.fire('Error', 'There was a problem deleting your file.', 'error');

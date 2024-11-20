@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
     moduleId: module.id,
     templateUrl: './add.html',
 })
-export class EmployeeAddComponent {
+export class StudentAddComponent {
     @ViewChild('modal2') modal!: ModalComponent;
     unitList: any[] = [];
     desaList: any[] = [];
@@ -175,10 +175,6 @@ export class EmployeeAddComponent {
         );
     }
 
-    toggleDateField(field: string, event: any) {
-        this.params[field] = event ? 1 : 0;
-    }
-
     changeDesa(selectedDesa: any): void {
         this.params.provinsi = selectedDesa.province;
         this.params.kabupaten = selectedDesa.regency;
@@ -186,7 +182,7 @@ export class EmployeeAddComponent {
     }
 
     save() {
-        this.dataMasterService.createEmployee(this.params).subscribe(
+        this.dataMasterService.createMember(this.params).subscribe(
             (response) => {
                 this.router.navigate(['/apps/masterData/employee/list']);
                 this.showMessage('Create Data Successful!', 'top-end', 'success');
@@ -220,7 +216,7 @@ export class EmployeeAddComponent {
     }
 
     delete(id: number) {
-        this.dataMasterService.deleteEmployee(id).subscribe(
+        this.dataMasterService.deleteMember(id).subscribe(
             (response) => {
                 console.log('Employee deleted successfully', response);
             },

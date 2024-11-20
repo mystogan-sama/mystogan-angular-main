@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -45,6 +45,15 @@ import { EmployeeListComponent } from './masterData/employee/list';
 import { EmployeePreviewComponent } from './masterData/employee/preview';
 import { EmployeeAddComponent } from './masterData/employee/add';
 import { EmployeeEditComponent } from './masterData/employee/edit';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { TextMaskModule } from 'angular2-text-mask';
+import { ClassListComponent } from './training/class/list';
+import { ClassAddComponent } from './training/class/add';
+import { ClassEditComponent } from './training/class/edit';
+import { StudentListComponent } from './masterData/student/list';
+import { StudentPreviewComponent } from './masterData/student/preview';
+import { StudentAddComponent } from './masterData/student/add';
+import { StudentEditComponent } from './masterData/student/edit';
 
 const routes: Routes = [
     { path: 'apps/chat', component: ChatComponent, title: 'Chat | VRISTO - Multipurpose Tailwind Dashboard Template' },
@@ -61,10 +70,18 @@ const routes: Routes = [
     { path: 'apps/masterData/employee/preview', component: EmployeePreviewComponent, title: 'Preview Employee' },
     { path: 'apps/masterData/employee/add', component: EmployeeAddComponent, title: 'Add Employee' },
     { path: 'apps/masterData/employee/edit/:id', component: EmployeeEditComponent, title: 'Update Employee' },
+    { path: 'apps/masterData/student/list', component: StudentListComponent, title: 'List Student' },
+    { path: 'apps/masterData/student/preview', component: StudentPreviewComponent, title: 'Preview Student' },
+    { path: 'apps/masterData/student/add', component: StudentAddComponent, title: 'Add Student' },
+    { path: 'apps/masterData/student/edit/:id', component: StudentEditComponent, title: 'Update Student' },
+    { path: 'apps/training/class/list', component: ClassListComponent, title: 'List Class' },
+    { path: 'apps/training/class/add', component: ClassAddComponent, title: 'Add Class' },
+    { path: 'apps/training/class/edit/:id', component: ClassEditComponent, title: 'Update Class' },
     { path: 'apps/calendar', component: CalendarComponent, title: 'Calendar | VRISTO - Multipurpose Tailwind Dashboard Template' },
 ];
 
 @NgModule({
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     imports: [
         RouterModule.forChild(routes),
         CommonModule,
@@ -73,6 +90,8 @@ const routes: Routes = [
         ModalModule,
         SortablejsModule,
         MenuModule,
+        NgSelectModule,
+        TextMaskModule,
         NgScrollbarModule.withConfig({
             visibility: 'hover',
             appearance: 'standard',
@@ -97,6 +116,13 @@ const routes: Routes = [
         EmployeePreviewComponent,
         EmployeeAddComponent,
         EmployeeEditComponent,
+        StudentListComponent,
+        StudentPreviewComponent,
+        StudentAddComponent,
+        StudentEditComponent,
+        ClassListComponent,
+        ClassAddComponent,
+        ClassEditComponent,
         CalendarComponent,
         MailboxComponent,
     ],

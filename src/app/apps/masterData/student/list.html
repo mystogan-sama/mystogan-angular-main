@@ -3,9 +3,9 @@
         <div class="datatable invoice-table">
             <div class="mb-4.5 flex flex-col gap-5 px-5 md:flex-row md:items-center">
                 <div class="flex items-center gap-2">
-                    <a routerLink="/apps/masterData/employee/add" class="btn btn-primary gap-2">
+                    <a routerLink="/apps/masterData/student/add" class="btn btn-primary gap-2">
                         <icon-plus />
-                        Tambah Pegawai
+                        Add Student
                     </a>
                 </div>
                 <div class="ltr:ml-auto rtl:mr-auto">
@@ -31,9 +31,9 @@
                 </ng-template>
                 <ng-template slot="nama_lengkap" let-value="data">
                     <div class="flex items-center font-semibold">
-                        <div class="w-max rounded-full bg-white-dark/30 p-0.5 ltr:mr-2 rtl:ml-2">
+                        <!-- <div class="w-max rounded-full bg-white-dark/30 p-0.5 ltr:mr-2 rtl:ml-2">
                             <img class="h-8 w-8 rounded-full object-cover" [src]="value.foto ||'/assets/images/profile-'+ value.id + '.jpeg'" />
-                        </div>
+                        </div> -->
                         {{ value.nama_lengkap }}
                     </div>
                 </ng-template>
@@ -53,7 +53,7 @@
                 </ng-template>
                 <ng-template slot="actions" let-value="data">
                     <div class="flex items-center justify-center gap-4">
-                        <a [routerLink]="['/apps/masterData/employee/edit', value.id]" class="hover:text-info">
+                        <a [routerLink]="['/apps/masterData/student/edit', value.id]" class="hover:text-info">
                             <icon-edit class="h-4.5 w-4.5" />
                         </a>
                         <a routerLink="/apps/invoice/preview" class="hover:text-primary">

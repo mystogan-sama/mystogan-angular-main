@@ -1,12 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { DataMasterService } from 'src/app/service/dataMaster.service';
+import { OperationsService } from 'src/app/service/operations.service';
 import Swal from 'sweetalert2';
 
 @Component({
     moduleId: module.id,
     templateUrl: './list.html',
 })
-export class EmployeeListComponent {
+export class ClassListComponent {
     members: any[] = [];
     member: any = {};
     pbn: any[] = [];
@@ -16,136 +17,40 @@ export class EmployeeListComponent {
     status: any[] = [];
     unit: any[] = [];
     users: any[] = [];
+    classes: any[] = [];
+    class: any = {};
 
-    constructor(private dataMasterService: DataMasterService) {}
+    constructor(private dataMasterService: DataMasterService, private opertationsService: OperationsService) {}
     @ViewChild('datatable') datatable: any;
     search = '';
     cols = [
-        { field: 'nama_lengkap', title: 'Name' },
-        { field: 'jenis_kelamin', title: 'Gender' },
-        { field: 'status_nikah', title: 'Marital Status' },
-        { field: 'alamat', title: 'Address' },
-        { field: 'no_telp', title: 'No. Telp' },
-        { field: 'status_aktif', title: 'Status', headerClass: 'justify-center' },
+        { field: 'cafe', title: 'Cafe' },
+        { field: 'wasis', title: 'WASIS' },
+        { field: 'walas', title: 'WALAS' },
+        { field: 'trainer', title: 'Trainer' },
+        { field: 'metode', title: 'Metode'},
         { field: 'actions', title: 'Actions', sort: false, headerClass: 'justify-center' },
-    ];
-    items = [
-        {
-            id: 1,
-            invoice: '081451',
-            name: 'Laurie Fox',
-            email: 'lauriefox@company.com',
-            date: '15 Dec 2020',
-            amount: '2275.45',
-            status: 'Paid',
-        },
-        {
-            id: 2,
-            invoice: '081452',
-            name: 'Alexander Gray',
-            email: 'alexGray3188@gmail.com',
-            date: '20 Dec 2020',
-            amount: '1044.00',
-            status: 'Paid',
-        },
-        {
-            id: 3,
-            invoice: '081681',
-            name: 'James Taylor',
-            email: 'jamestaylor468@gmail.com',
-            date: '27 Dec 2020',
-            amount: '20.00',
-            status: 'Pending',
-        },
-        {
-            id: 4,
-            invoice: '082693',
-            name: 'Grace Roberts',
-            email: 'graceRoberts@company.com',
-            date: '31 Dec 2020',
-            amount: '344.00',
-            status: 'Paid',
-        },
-        {
-            id: 5,
-            invoice: '084743',
-            name: 'Donna Rogers',
-            email: 'donnaRogers@hotmail.com',
-            date: '03 Jan 2021',
-            amount: '405.15',
-            status: 'Paid',
-        },
-        {
-            id: 6,
-            invoice: '086643',
-            name: 'Amy Diaz',
-            email: 'amy968@gmail.com',
-            date: '14 Jan 2020',
-            amount: '100.00',
-            status: 'Paid',
-        },
-        {
-            id: 7,
-            invoice: '086773',
-            name: 'Nia Hillyer',
-            email: 'niahillyer666@comapny.com',
-            date: '20 Jan 2021',
-            amount: '59.21',
-            status: 'Pending',
-        },
-        {
-            id: 8,
-            invoice: '087916',
-            name: 'Mary McDonald',
-            email: 'maryDonald007@gamil.com',
-            date: '25 Jan 2021',
-            amount: '79.00',
-            status: 'Pending',
-        },
-        {
-            id: 9,
-            invoice: '089472',
-            name: 'Andy King',
-            email: 'kingandy07@company.com',
-            date: '28 Jan 2021',
-            amount: '149.00',
-            status: 'Paid',
-        },
-        {
-            id: 10,
-            invoice: '091768',
-            name: 'Vincent Carpenter',
-            email: 'vincentcarpenter@gmail.com',
-            date: '30 Jan 2021',
-            amount: '400',
-            status: 'Paid',
-        },
-        {
-            id: 11,
-            invoice: '095841',
-            name: 'Kelly Young',
-            email: 'youngkelly@hotmail.com',
-            date: '06 Feb 2021',
-            amount: '49.00',
-            status: 'Pending',
-        },
-        {
-            id: 12,
-            invoice: '098424',
-            name: 'Alma Clarke',
-            email: 'alma.clarke@gmail.com',
-            date: '10 Feb 2021',
-            amount: '234.40',
-            status: 'Paid',
-        },
     ];
 
     ngOnInit(): void {
-        this.getEmployees();
+        this.getClass();
+        this.getMembers()
     }
 
-    getEmployees(): void {
-        this.dataMasterService.getEmployees().subscribe(
+    getClass(): void {
+        this.opertationsService.getClass().subscribe(
+            (data) => {
+                this.classes = data;
+                console.log(this.classes);
+            },
+            (error) => {
+                console.error('Error fetching classes', error);
+            }
+        );
+    }
+
+    getMembers(): void {
+        this.dataMasterService.getMembers().subscribe(
             (data) => {
                 this.members = data;
                 console.log(this.members);
@@ -154,6 +59,11 @@ export class EmployeeListComponent {
                 console.error('Error fetching members', error);
             }
         );
+    }
+
+    getMemberNameById(id: number): string {
+        const member = this.members.find(member => member.id === id);
+        return member ? member.nama_panggilan : 'Unknown';
     }
 
     getPbn(): void {
@@ -290,7 +200,7 @@ export class EmployeeListComponent {
                 this.dataMasterService.deleteEmployee(id).subscribe(
                     () => {
                         swalWithBootstrapButtons.fire('Deleted!', 'Your file has been deleted.', 'success');
-                        this.getEmployees();
+                        this.getMembers();
                     },
                     (error) => {
                         swalWithBootstrapButtons.fire('Error', 'There was a problem deleting your file.', 'error');

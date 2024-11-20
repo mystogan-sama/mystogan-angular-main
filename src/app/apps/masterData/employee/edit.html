@@ -1,46 +1,71 @@
 <div>
     <div class="flex flex-col gap-2.5 xl:flex-row">
         <div class="panel flex-1 px-0 py-6 ltr:xl:mr-6 rtl:xl:ml-6">
-            <div class="flex flex-wrap justify-center px-4">
-                <div class="text-lg">ADD EMPLOYEE</div>
+            <div class="flex items-center justify-between px-4">
+                <button routerLink="/apps/masterData/employee/list" type="button" class="btn btn-outline-dark gap-2">
+                    <icon-arrow-backward class="shrink-0 ltr:mr-2 rtl:ml-2" />
+                </button>
+                <div class="flex-1 text-center text-lg">Update Pegawai</div>
+
+                <!-- Elemen kosong agar tombol Cancel tetap di kiri -->
+                <div class="invisible">Placeholder</div>
             </div>
             <hr class="my-6 border-[#e0e6ed] dark:border-[#1b2e4b]" />
             <div class="mt-8 px-4">
                 <div class="grid grid-cols-1 gap-6">
                     <!-- Baris Pertama: Unit, PBN, Pendidikan -->
                     <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
-                        <div class="lg:w-1/4">
+                        <!-- <div class="lg:w-1/4">
                             <label for="id_unit" class="mb-0">Unit</label>
                             <select id="id_unit" class="form-select flex-1" style="width: 95%" [(ngModel)]="params.id_unit">
                                 <option *ngFor="let unit of unitList" [value]="unit.id">{{unit.code}} - {{unit.name}}</option>
                             </select>
+                        </div> -->
+                        <div class="lg:w-1/3">
+                            <label for="id_unit" class="mb-0">Unit</label>
+                            <ng-select
+                                id="id_unit"
+                                [items]="unitList"
+                                bindLabel="name"
+                                bindValue="id"
+                                [(ngModel)]="params.id_unit"
+                                placeholder="Select Unit"
+                                class="custom-multiselect"
+                                style="width: 95%"
+                            >
+                            </ng-select>
                         </div>
-                        <div class="lg:w-1/4">
+                        <div class="lg:w-1/3">
                             <label for="id_pbn" class="mb-0">PBN</label>
-                            <select id="id_pbn" class="form-select flex-1" style="width: 95%" [(ngModel)]="params.id_pbn">
-                                <option *ngFor="let pbn of pbnList" [value]="pbn.id">{{pbn.kode}}</option>
-                            </select>
+                            <ng-select
+                                id="id_pbn"
+                                [items]="pbnList"
+                                bindLabel="kode"
+                                bindValue="id"
+                                [(ngModel)]="params.id_pbn"
+                                placeholder="Select PBN"
+                                class="custom-multiselect"
+                                style="width: 95%"
+                            >
+                            </ng-select>
                         </div>
-                        <div class="lg:w-1/4">
+                        <div class="lg:w-1/3">
                             <label for="id_pendidikan" class="mb-0">Pendidikan</label>
-                            <select id="id_pendidikan" class="form-select flex-1" style="width: 95%" [(ngModel)]="params.id_pendidikan">
-                                <option *ngFor="let pendidikan of pendidikanList" [value]="pendidikan.id">{{pendidikan.nama}}</option>
-                            </select>
-                        </div>
-                        <div class="lg:w-1/4">
-                            <label for="id_status" class="mb-0">Status</label>
-                            <select id="id_status" class="form-select flex-1" style="width: 95%" [(ngModel)]="params.id_status">
-                                <option *ngFor="let status of statusList" [value]="status.id">{{status.kode}}</option>
-                            </select>
+                            <ng-select
+                                id="id_pendidikan"
+                                [items]="pendidikanList"
+                                bindLabel="nama"
+                                bindValue="id"
+                                [(ngModel)]="params.id_pendidikan"
+                                placeholder="Select Pendidikan"
+                                class="custom-multiselect"
+                                style="width: 95%"
+                            >
+                            </ng-select>
                         </div>
                     </div>
-
                     <!-- Kolom Lainnya -->
                     <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
-                        <div class="lg:w-1/4">
-                            <label for="nik">NIK</label>
-                            <input id="nik" type="text" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.nik" placeholder="Enter NIK" />
-                        </div>
                         <div class="lg:w-1/4">
                             <label for="nama_lengkap">Nama Lengkap</label>
                             <input
@@ -65,53 +90,39 @@
                         </div>
                         <div class="lg:w-1/4">
                             <label for="jenis_kelamin">Jenis Kelamin</label>
-                            <select id="jenis_kelamin" class="form-select flex-1" style="width: 95%" [(ngModel)]="params.jenis_kelamin">
-                                <option value="1">Laki-laki</option>
-                                <option value="2">Perempuan</option>
-                            </select>
+                            <ng-select
+                                id="jenis_kelamin"
+                                [(ngModel)]="params.jenis_kelamin"
+                                [items]="jenisKelaminOptions"
+                                bindLabel="label"
+                                bindValue="value"
+                                placeholder="Select Jenis Kelamin"
+                                class="custom-multiselect"
+                                style="width: 95%"
+                            >
+                            </ng-select>
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="status_nikah">Status Pernikahan</label>
+                            <ng-select
+                                id="status_nikah"
+                                [(ngModel)]="params.status_nikah"
+                                [items]="status_nikahOptions"
+                                bindLabel="label"
+                                bindValue="value"
+                                placeholder="Select Status Nikah"
+                                class="custom-multiselect"
+                                style="width: 95%"
+                            >
+                            </ng-select>
                         </div>
                     </div>
                     <!-- Baris Berikutnya -->
                     <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
                         <div class="lg:w-1/4">
-                            <label for="tempat_lahir">Tempat Lahir</label>
-                            <input
-                                id="tempat_lahir"
-                                type="text"
-                                class="form-input flex-1"
-                                style="width: 95%"
-                                [(ngModel)]="params.tempat_lahir"
-                                placeholder="Enter Tempat Lahir"
-                            />
-                        </div>
-                        <div class="lg:w-1/4">
                             <label for="tanggal_lahir">Tanggal Lahir</label>
                             <input id="tanggal_lahir" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.tanggal_lahir" />
                         </div>
-                        <div class="lg:w-1/4">
-                            <label for="segmen">Segmen</label>
-                            <input
-                                id="segmen"
-                                type="number"
-                                class="form-input flex-1"
-                                style="width: 95%"
-                                [(ngModel)]="params.segmen"
-                                placeholder="Enter Segmen"
-                            />
-                        </div>
-                        <div class="lg:w-1/4">
-                            <label for="kampus">Kampus</label>
-                            <input
-                                id="kampus"
-                                type="text"
-                                class="form-input flex-1"
-                                style="width: 95%"
-                                [(ngModel)]="params.kampus"
-                                placeholder="Enter Kampus"
-                            />
-                        </div>
-                    </div>
-                    <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
                         <div class="lg:w-1/4">
                             <label for="pekerjaan">Pekerjaan</label>
                             <input
@@ -124,159 +135,448 @@
                             />
                         </div>
                         <div class="lg:w-1/4">
-                            <label for="profesi">Profesi</label>
-                            <input
-                                id="profesi"
-                                type="text"
-                                class="form-input flex-1"
-                                style="width: 95%"
-                                [(ngModel)]="params.profesi"
-                                placeholder="Enter Profesi"
-                            />
-                        </div>
-                        <div class="lg:w-1/4">
-                            <label for="ket_profesi">Keterangan Profesi</label>
-                            <input
-                                id="ket_profesi"
-                                type="text"
-                                class="form-input flex-1"
-                                style="width: 95%"
-                                [(ngModel)]="params.ket_profesi"
-                                placeholder="Enter Keterangan Profesi"
-                            />
-                        </div>
-                        <div class="lg:w-1/4">
-                            <label for="penghasilan">Penghasilan</label>
-                            <input
-                                id="penghasilan"
-                                type="text"
-                                class="form-input flex-1"
-                                style="width: 95%"
-                                [(ngModel)]="params.penghasilan"
-                                placeholder="Enter Penghasilan"
-                            />
-                        </div>
-                    </div>
-                    <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
-                        <div class="lg:w-1/4">
-                            <label for="status_nikah">Status Nikah</label>
-                            <select id="status_nikah" class="form-select flex-1" style="width: 95%" [(ngModel)]="params.status_nikah">
-                                <option value="1">Single</option>
-                                <option value="2">Married</option>
-                            </select>
-                        </div>
-                        <div class="lg:w-1/4">
                             <label for="status_aktif">Status Aktif</label>
-                            <select id="status_aktif" class="form-select flex-1" style="width: 95%" [(ngModel)]="params.status_aktif">
-                                <option value="1">Active</option>
-                                <option value="2">Pasive</option>
-                            </select>
+                            <ng-select
+                                id="status_aktif"
+                                [(ngModel)]="params.status_aktif"
+                                [items]="statusOptions"
+                                bindLabel="label"
+                                bindValue="value"
+                                placeholder="Select Status Aktif"
+                                class="custom-multiselect"
+                                style="width: 95%"
+                            >
+                            </ng-select>
                         </div>
                         <div class="lg:w-1/4">
-                            <label for="no_hp">No HP</label>
-                            <input id="no_hp" type="text" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.no_telp" placeholder="Enter No HP" />
-                        </div>
-                        <div class="lg:w-1/4">
-                            <label for="alamat">Alamat</label>
-                            <textarea
-                                id="alamat"
+                            <label for="no_telp">No. HP</label>
+                            <input
+                                id="no_telp"
                                 type="text"
                                 class="form-input flex-1"
                                 style="width: 95%"
-                                [(ngModel)]="params.alamat"
-                                placeholder="Enter Alamat"
-                            ></textarea>
+                                [(ngModel)]="params.no_telp"
+                                placeholder="Enter No HP"
+                            />
                         </div>
                     </div>
                     <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
                         <div class="lg:w-1/4">
-                          <label for="provinsi">Provinsi</label>
-                          <select
-                            id="provinsi"
-                            class="form-select flex-1"
-                            style="width: 95%"
-                            [(ngModel)]="params.provinsi"
-                            (change)="onProvinsiChange(params.provinsi)"
-                          >
-                            <option *ngFor="let provinsi of provinsiList" [value]="provinsi.id">{{ provinsi.nama }}</option>
-                          </select>
+                            <label for="provinsi">Provinsi</label>
+                            <input id="provinsi" type="text" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.provinsi" disabled />
                         </div>
                         <div class="lg:w-1/4">
-                          <label for="kabupaten">Kabupaten</label>
-                          <select
-                            id="kabupaten"
-                            class="form-select flex-1"
-                            style="width: 95%"
-                            [(ngModel)]="params.kabupaten"
-                            (change)="onKabupatenChange(params.kabupaten)"
-                            [disabled]="!params.provinsi"
-                          >
-                            <option *ngFor="let kabupaten of kabupatenList" [value]="kabupaten.id">{{ kabupaten.nama }}</option>
-                          </select>
+                            <label for="kabupaten">Kabupaten</label>
+                            <input id="kabupaten" type="text" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.kabupaten" disabled />
                         </div>
                         <div class="lg:w-1/4">
-                          <label for="kecamatan">Kecamatan</label>
-                          <select
-                            id="kecamatan"
-                            class="form-select flex-1"
-                            style="width: 95%"
-                            [(ngModel)]="params.kecamatan"
-                            (change)="onKecamatanChange(params.kecamatan)"
-                            [disabled]="!params.kabupaten"
-                          >
-                            <option *ngFor="let kecamatan of kecamatanList" [value]="kecamatan.id">{{ kecamatan.nama }}</option>
-                          </select>
+                            <label for="kecamatan">Kecamatan</label>
+                            <input id="kecamatan" type="text" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.kecamatan" disabled />
                         </div>
                         <div class="lg:w-1/4">
-                          <label for="desa">Desa</label>
-                          <select
-                            id="desa"
-                            class="form-select flex-1"
-                            style="width: 95%"
-                            [(ngModel)]="params.desa"
-                            [disabled]="!params.kecamatan"
-                          >
-                            <option *ngFor="let desa of desaList" [value]="desa.id">{{ desa.nama }}</option>
-                          </select>
+                            <label for="desa" class="mb-0">Desa</label>
+                            <ng-select
+                                id="desa"
+                                [items]="desaList"
+                                bindLabel="village"
+                                bindValue="village"
+                                [(ngModel)]="params.desa"
+                                [typeahead]="searchDesaSubject"
+                                (change)="changeDesa($event)"
+                                placeholder="Select Desa"
+                                class="custom-multiselect"
+                                style="width: 95%"
+                            >
+                                <ng-template ng-label-tmp let-item="item">
+                                    {{ item.province }} - {{ item.regency }} - {{ item.district }} - {{ item.village }}
+                                </ng-template>
+                                <ng-template ng-option-tmp let-item="item">
+                                    {{ item.province }} - {{ item.regency }} - {{ item.district }} - {{ item.village }}
+                                </ng-template>
+                            </ng-select>
                         </div>
-                      </div>>
-                    <div class="mb-4 flex flex-col lg:flex-row lg:items-center">
-                        <div class="lg:w-1/4">
-                            <div class="flex">
-                                <button type="button" class="btn btn-outline-success ltr:rounded-r-none rtl:rounded-l-none" (click)="openModal()">
-                                    <icon-camera class="shrink-0 ltr:mr-2 rtl:ml-2" />Foto
-                                </button>
+                    </div>
+                    <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div class="lg:w-1/6">
+                            <label for="p_naq1">NAQ 1</label>
+                            <label class="relative h-6 w-12">
                                 <input
-                                    id="addonsLeftoutline"
-                                    type="text"
-                                    placeholder=""
-                                    class="form-input ltr:rounded-l-none rtl:rounded-r-none"
-                                    [(ngModel)]="params.foto"
+                                    type="checkbox"
+                                    class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                    id="p_naq1"
+                                    [(ngModel)]="params.p_naq1"
+                                    (ngModelChange)="toggleDateField('p_naq1', $event)"
                                 />
-                            </div>
+                                <span
+                                    for="p_naq1"
+                                    class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                ></span>
+                            </label>
+                        </div>
+                        <div class="lg:w-1/6">
+                            <label for="p_naq2">NAQ 2</label>
+                            <label class="relative h-6 w-12">
+                                <input
+                                    type="checkbox"
+                                    class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                    id="p_naq2"
+                                    [(ngModel)]="params.p_naq2"
+                                    (ngModelChange)="toggleDateField('p_naq2', $event)"
+                                />
+                                <span
+                                    for="p_naq2"
+                                    class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                ></span>
+                            </label>
+                        </div>
+                        <div class="lg:w-1/6">
+                            <label for="p_ta1">Trainer A1</label>
+                            <label class="relative h-6 w-12">
+                                <input
+                                    type="checkbox"
+                                    class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                    id="p_ta1"
+                                    [(ngModel)]="params.p_ta1"
+                                    (ngModelChange)="toggleDateField('p_ta1', $event)"
+                                />
+                                <span
+                                    for="p_ta1"
+                                    class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                ></span>
+                            </label>
+                        </div>
+                        <div class="lg:w-1/6">
+                            <label for="p_t11">Trainer A11</label>
+                            <label class="relative h-6 w-12">
+                                <input
+                                    type="checkbox"
+                                    class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                    id="p_t11"
+                                    [(ngModel)]="params.p_t11"
+                                    (ngModelChange)="toggleDateField('p_t11', $event)"
+                                />
+                                <span
+                                    for="p_t11"
+                                    class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                ></span>
+                            </label>
+                        </div>
+                        <div class="lg:w-1/6">
+                            <label for="p_t12">Trainer A12</label>
+                            <label class="relative h-6 w-12">
+                                <input
+                                    type="checkbox"
+                                    class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                    id="p_t12"
+                                    [(ngModel)]="params.p_t12"
+                                    (ngModelChange)="toggleDateField('p_t12', $event)"
+                                />
+                                <span
+                                    for="p_t12"
+                                    class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                ></span>
+                            </label>
+                        </div>
+                        <div class="lg:w-1/6">
+                            <label for="p_t13">Trainer A13</label>
+                            <label class="relative h-6 w-12">
+                                <input
+                                    type="checkbox"
+                                    class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                    id="p_t13"
+                                    [(ngModel)]="params.p_t13"
+                                    (ngModelChange)="toggleDateField('p_t13', $event)"
+                                />
+                                <span
+                                    for="p_t13"
+                                    class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                ></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div class="lg:w-1/6" [ngClass]="{'invisible': !params.p_naq1}">
+                            <label for="p_naq1_date">Date NAQ 1</label>
+                            <input id="p_naq1_date" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.p_naq1_date" />
+                        </div>
+                        <div class="lg:w-1/6" [ngClass]="{'invisible': !params.p_naq2}">
+                            <label for="p_naq2_date">Date NAQ 2</label>
+                            <input id="p_naq2_date" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.p_naq2_date" />
+                        </div>
+                        <div class="lg:w-1/6" [ngClass]="{'invisible': !params.p_ta1}">
+                            <label for="p_ta1_date">Date Trainer A1</label>
+                            <input id="p_ta1_date" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.p_ta1_date" />
+                        </div>
+                        <div class="lg:w-1/6" [ngClass]="{'invisible': !params.p_t11}">
+                            <label for="p_t11_date">Date Trainer A11</label>
+                            <input id="p_t11_date" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.p_t11_date" />
+                        </div>
+                        <div class="lg:w-1/6" [ngClass]="{'invisible': !params.p_t12}">
+                            <label for="p_t12_date">Date Trainer A12</label>
+                            <input id="p_t12_date" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.p_t12_date" />
+                        </div>
+                        <div class="lg:w-1/6" [ngClass]="{'invisible': !params.p_t13}">
+                            <label for="p_t13_date">Date Trainer A13</label>
+                            <input id="p_t13_date" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.p_t13_date" />
+                        </div>
+                    </div>
+                    <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div class="lg:w-1/6">
+                            <label for="p_bps1">BPS 1</label>
+                            <label class="relative h-6 w-12">
+                                <input
+                                    type="checkbox"
+                                    class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                    id="p_bps1"
+                                    [(ngModel)]="params.p_bps1"
+                                    (ngModelChange)="toggleDateField('p_bps1', $event)"
+                                />
+                                <span
+                                    for="p_bps1"
+                                    class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                ></span>
+                            </label>
+                        </div>
+                        <div class="lg:w-1/6">
+                            <label for="p_o1">Pengolah 1</label>
+                            <label class="relative h-6 w-12">
+                                <input
+                                    type="checkbox"
+                                    class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                    id="p_o1"
+                                    [(ngModel)]="params.p_o1"
+                                    (ngModelChange)="toggleDateField('p_o1', $event)"
+                                />
+                                <span
+                                    for="p_o1"
+                                    class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                ></span>
+                            </label>
+                        </div>
+                        <div class="lg:w-1/6">
+                            <label for="p_i1">Iqro 1</label>
+                            <label class="relative h-6 w-12">
+                                <input
+                                    type="checkbox"
+                                    class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                    id="p_i1"
+                                    [(ngModel)]="params.p_i1"
+                                    (ngModelChange)="toggleDateField('p_i1', $event)"
+                                />
+                                <span
+                                    for="p_i1"
+                                    class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                ></span>
+                            </label>
+                        </div>
+                        <div class="lg:w-1/6">
+                            <label for="p_tfa2a">Tfts A2A</label>
+                            <label class="relative h-6 w-12">
+                                <input
+                                    type="checkbox"
+                                    class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                    id="p_tfa2a"
+                                    [(ngModel)]="params.p_tfa2a"
+                                    (ngModelChange)="toggleDateField('p_tfa2a', $event)"
+                                />
+                                <span
+                                    for="p_tfa2a"
+                                    class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                ></span>
+                            </label>
+                        </div>
+                        <div class="lg:w-1/6">
+                            <label for="p_ta2">Trainer A2</label>
+                            <label class="relative h-6 w-12">
+                                <input
+                                    type="checkbox"
+                                    class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                    id="p_ta2"
+                                    [(ngModel)]="params.p_ta2"
+                                    (ngModelChange)="toggleDateField('p_ta2', $event)"
+                                />
+                                <span
+                                    for="p_ta2"
+                                    class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                ></span>
+                            </label>
+                        </div>
+                        <div class="lg:w-1/6">
+                            <label for="p_ta2m1">Trainer A2 M1</label>
+                            <label class="relative h-6 w-12">
+                                <input
+                                    type="checkbox"
+                                    class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                    id="p_ta2m1"
+                                    [(ngModel)]="params.p_ta2m1"
+                                    (ngModelChange)="toggleDateField('p_ta2m1', $event)"
+                                />
+                                <span
+                                    for="p_ta2m1"
+                                    class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                ></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div class="lg:w-1/6" [ngClass]="{'invisible': !params.p_bps1}">
+                            <label for="p_bps1_date">Date BPS 1</label>
+                            <input id="p_bps1_date" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.p_bps1_date" />
+                        </div>
+                        <div class="lg:w-1/6" [ngClass]="{'invisible': !params.p_o1}">
+                            <label for="p_o1_date">Date Pengolah 1</label>
+                            <input id="p_o1_date" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.p_o1_date" />
+                        </div>
+                        <div class="lg:w-1/6" [ngClass]="{'invisible': !params.p_i1}">
+                            <label for="p_i1_date">Date Iqro A1</label>
+                            <input id="p_i1_date" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.p_i1_date" />
+                        </div>
+                        <div class="lg:w-1/6" [ngClass]="{'invisible': !params.p_tfa2a}">
+                            <label for="p_tfa2a_date">Date Tfts A2A</label>
+                            <input id="p_tfa2a_date" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.p_tfa2a_date" />
+                        </div>
+                        <div class="lg:w-1/6" [ngClass]="{'invisible': !params.p_ta2}">
+                            <label for="p_ta2_date">Date Trainer A2</label>
+                            <input id="p_ta2_date" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.p_ta2_date" />
+                        </div>
+                        <div class="lg:w-1/6" [ngClass]="{'invisible': !params.p_ta2m1}">
+                            <label for="p_ta2m1_date">Date Trainer A2 M1</label>
+                            <input id="p_ta2m1_date" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.p_ta2m1_date" />
+                        </div>
+                    </div>
+                    <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div class="lg:w-1/6">
+                            <label for="p_ta2m2">Trainer A2 M2</label>
+                            <label class="relative h-6 w-12">
+                                <input
+                                    type="checkbox"
+                                    class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                    id="p_ta2m2"
+                                    [(ngModel)]="params.p_ta2m2"
+                                    (ngModelChange)="toggleDateField('p_ta2m2', $event)"
+                                />
+                                <span
+                                    for="p_ta2m2"
+                                    class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                ></span>
+                            </label>
+                        </div>
+                        <div class="lg:w-1/6">
+                            <label for="p_ta2m3">Trainer A2 M3</label>
+                            <label class="relative h-6 w-12">
+                                <input
+                                    type="checkbox"
+                                    class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                    id="p_ta2m3"
+                                    [(ngModel)]="params.p_ta2m3"
+                                    (ngModelChange)="toggleDateField('p_ta2m3', $event)"
+                                />
+                                <span
+                                    for="p_ta2m3"
+                                    class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                ></span>
+                            </label>
+                        </div>
+                        <div class="lg:w-1/6">
+                            <label for="p_o2">Pengolah 2</label>
+                            <label class="relative h-6 w-12">
+                                <input
+                                    type="checkbox"
+                                    class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                    id="p_o2"
+                                    [(ngModel)]="params.p_o2"
+                                    (ngModelChange)="toggleDateField('p_o2', $event)"
+                                />
+                                <span
+                                    for="p_o2"
+                                    class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                ></span>
+                            </label>
+                        </div>
+                        <div class="lg:w-1/6">
+                            <label for="p_tfa22">Tfts A22</label>
+                            <label class="relative h-6 w-12">
+                                <input
+                                    type="checkbox"
+                                    class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                    id="p_tfa22"
+                                    [(ngModel)]="params.p_tfa22"
+                                    (ngModelChange)="toggleDateField('p_tfa22', $event)"
+                                />
+                                <span
+                                    for="p_tfa22"
+                                    class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                ></span>
+                            </label>
+                        </div>
+                        <div class="lg:w-1/6">
+                            <label for="p_bps2">BPS 2</label>
+                            <label class="relative h-6 w-12">
+                                <input
+                                    type="checkbox"
+                                    class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                    id="p_bps2"
+                                    [(ngModel)]="params.p_bps2"
+                                    (ngModelChange)="toggleDateField('p_bps2', $event)"
+                                />
+                                <span
+                                    for="p_bps2"
+                                    class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                ></span>
+                            </label>
+                        </div>
+                        <div class="lg:w-1/6">
+                            <label for="p_tfa2p">Tfts A2P</label>
+                            <label class="relative h-6 w-12">
+                                <input
+                                    type="checkbox"
+                                    class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                    id="p_tfa2p"
+                                    [(ngModel)]="params.p_tfa2p"
+                                    (ngModelChange)="toggleDateField('p_tfa2p', $event)"
+                                />
+                                <span
+                                    for="p_tfa2p"
+                                    class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                ></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div class="lg:w-1/6" [ngClass]="{'invisible': !params.p_ta2m2}">
+                            <label for="p_ta2m2_date">Date Trainer A2 M2</label>
+                            <input id="p_ta2m2_date" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.p_ta2m2_date" />
+                        </div>
+                        <div class="lg:w-1/6" [ngClass]="{'invisible': !params.p_ta2m3}">
+                            <label for="p_ta2m3_date">Date Trainer A2 M3</label>
+                            <input id="p_ta2m3_date" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.p_ta2m3_date" />
+                        </div>
+                        <div class="lg:w-1/6" [ngClass]="{'invisible': !params.p_o2}">
+                            <label for="p_o2_date">Date Pengolah 2</label>
+                            <input id="p_o2_date" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.p_o2_date" />
+                        </div>
+                        <div class="lg:w-1/6" [ngClass]="{'invisible': !params.p_tfa22}">
+                            <label for="p_tfa22_date">Date Tfts A22</label>
+                            <input id="p_tfa22_date" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.p_tfa22_date" />
+                        </div>
+                        <div class="lg:w-1/6" [ngClass]="{'invisible': !params.p_bps2}">
+                            <label for="p_bps2_date">Date BPS 2</label>
+                            <input id="p_bps2_date" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.p_bps2_date" />
+                        </div>
+                        <div class="lg:w-1/6" [ngClass]="{'invisible': !params.p_tfa2p}">
+                            <label for="p_tfa2p_date">Date Tfts A2P</label>
+                            <input id="p_tfa2p_date" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="params.p_tfa2p_date" />
                         </div>
                     </div>
                     <!-- Modal -->
-                    <modal #modal2>
-                        <ng-template #modalHeader>
-                            <div>Upload Foto</div>
-                        </ng-template>
-                        <ng-template #modalBody>
-                            <div class="custom-file-container" data-upload-id="myFirstImage"></div>
-                        </ng-template>
-                        <ng-template #modalFooter>
-                            <button type="button" (click)="modal2.close()" class="btn btn-outline-danger">Discard</button>
-                            <button type="submit" (click)="onUpload()" class="btn btn-primary ltr:ml-4 rtl:mr-4">Upload</button>
-                        </ng-template>
-                    </modal>
                     <div class="mt-8 flex flex-wrap justify-center justify-center px-4">
                         <button routerLink="/apps/masterData/employee/list" type="button" class="btn btn-outline-dark gap-2">
                             <icon-arrow-backward class="shrink-0 ltr:mr-2 rtl:ml-2" />
                             Cancel
                         </button>
                         <span class="mx-4"></span>
-                        <button type="button" class="btn btn-info gap-2" (click)="save()">
-                            <icon-edit class="shrink-0 ltr:mr-2 rtl:ml-2" />
+                        <button type="button" class="btn btn-success gap-2" (click)="save()">
+                            <icon-save class="shrink-0 ltr:mr-2 rtl:ml-2" />
                             Update
                         </button>
                     </div>

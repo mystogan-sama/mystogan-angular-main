@@ -29,6 +29,7 @@ import { AuthLayout } from './layouts/auth-layout';
 import { KnowledgeBaseComponent } from './pages/knowledge-base';
 import { FaqComponent } from './pages/faq';
 import { LoginComponent } from './login';
+import { DashboardComponent } from './dashboard';
 
 export const routes: Routes = [
     {
@@ -50,6 +51,7 @@ export const routes: Routes = [
             // dashboard
             { path: 'index', component: IndexComponent, title: 'Sales Admin | VRISTO - Multipurpose Tailwind Dashboard Template' },
             { path: 'analytics', component: AnalyticsComponent, title: 'Analytics Admin | VRISTO - Multipurpose Tailwind Dashboard Template' },
+            { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
             { path: 'finance', component: FinanceComponent, title: 'Finance Admin | VRISTO - Multipurpose Tailwind Dashboard Template' },
             { path: 'crypto', component: CryptoComponent, title: 'Crypto Admin | VRISTO - Multipurpose Tailwind Dashboard Template' },
 

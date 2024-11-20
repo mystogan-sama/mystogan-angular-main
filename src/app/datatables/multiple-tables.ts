@@ -47,7 +47,7 @@ export class MultiTablesComponent {
             },
             phone: '+1 (821) 447-3782',
             isActive: true,
-            age: 39,
+            age: 90,
             company: 'POLARAX',
         },
         {

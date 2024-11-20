@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DataMasterService {
+  private subjekapiUrl = 'http://127.0.0.1:8000/api/subjeks';
+  private subjekSumApiUrl = 'http://127.0.0.1:8000/api/subjeks/summary';
   private memberapiUrl = 'http://127.0.0.1:8000/api/members';
   private pbnapiUrl = 'http://127.0.0.1:8000/api/pbn';
   private pendidikanapiUrl = 'http://127.0.0.1:8000/api/pendidikan';
@@ -17,6 +19,9 @@ export class DataMasterService {
 
   constructor(private http: HttpClient) { }
 
+
+
+  //student
   getMembers(): Observable<any> {
     return this.http.get<any>(`${this.memberapiUrl}/`);
   }
@@ -25,16 +30,42 @@ export class DataMasterService {
     return this.http.get<any>(`${this.memberapiUrl}/${id}/`);
   }
 
-  createEmployee(members: any): Observable<any> {
+  createMember(members: any): Observable<any> {
     return this.http.post(`${this.memberapiUrl}/`, members);
   }
 
-  updateEmployee(id: number, members: any): Observable<any> {
+  updateMember(id: number, members: any): Observable<any> {
     return this.http.put(`${this.memberapiUrl}/${id}/`, members);
   }
 
-  deleteEmployee(id: number): Observable<any> {
+  deleteMember(id: number): Observable<any> {
     return this.http.delete(`${this.memberapiUrl}/${id}/`);
+  }
+
+  //summary
+  getSummarySubjek(): Observable<any> {
+    return this.http.get<any>(`${this.subjekSumApiUrl}/`);
+  }
+
+  //employee
+  getEmployees(): Observable<any> {
+    return this.http.get<any>(`${this.subjekapiUrl}/`);
+  }
+
+  getEmployeebyId(id: number): Observable<any> {
+    return this.http.get<any>(`${this.subjekapiUrl}/${id}/`);
+  }
+
+  createEmployee(members: any): Observable<any> {
+    return this.http.post(`${this.subjekapiUrl}/`, members);
+  }
+
+  updateEmployee(id: number, members: any): Observable<any> {
+    return this.http.put(`${this.subjekapiUrl}/${id}/`, members);
+  }
+
+  deleteEmployee(id: number): Observable<any> {
+    return this.http.delete(`${this.subjekapiUrl}/${id}/`);
   }
 
   getPbn(): Observable<any> {

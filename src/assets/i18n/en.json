@@ -126,5 +126,10 @@
     "contact_us_boxed": "Contact Us Boxed",
     "contact_us_cover": "Contact Us Cover",
     "master_data": "Master Data",
-    "employee": "Employee"
+    "member": "Member",
+    "student": "Student",
+    "employee": "Employee",
+    "training": "Training",
+    "class": "Class",
+    "dashboard": "Dashboard"
 }

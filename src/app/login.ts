@@ -44,7 +44,7 @@ export class LoginComponent {
             (response) => {
                 if (response.access_token) {
                     localStorage.setItem('access_token', response.access_token);
-                    this.router.navigate(['/apps/masterData/employee/list']); // Ubah ke rute yang sesuai setelah login
+                    this.router.navigate(['/dashboard']); // Ubah ke rute yang sesuai setelah login
                     localStorage.setItem('user_info', JSON.stringify(response));  // Store the user info
                     this.showMessage('Login successful!', 'top-end', 'success');
                 } else {

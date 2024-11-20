@@ -49,6 +49,7 @@ import { QuillModule } from 'ngx-quill';
 // dashboard
 import { IndexComponent } from './index';
 import { AnalyticsComponent } from './analytics';
+import { DashboardComponent } from './dashboard';
 import { FinanceComponent } from './finance';
 import { CryptoComponent } from './crypto';
 
@@ -82,6 +83,7 @@ import { ThemeCustomizerComponent } from './layouts/theme-customizer';
 import { IconModule } from './shared/icon/icon.module';
 import { LoginComponent } from './login';
 import { AuthService } from './service/auth.service';
+import { OperationsService } from './service/operations.service';
 
 @NgModule({
     imports: [
@@ -129,6 +131,7 @@ import { AuthService } from './service/auth.service';
         ChartsComponent,
         IndexComponent,
         AnalyticsComponent,
+        DashboardComponent,
         FinanceComponent,
         CryptoComponent,
         WidgetsComponent,
@@ -143,6 +146,7 @@ import { AuthService } from './service/auth.service';
     providers: [
         AuthService,
         AppService,
+        OperationsService,
         Title,
         {
             provide: HIGHLIGHT_OPTIONS,

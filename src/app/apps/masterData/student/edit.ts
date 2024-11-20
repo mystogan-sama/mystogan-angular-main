@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
     moduleId: module.id,
     templateUrl: './edit.html',
 })
-export class EmployeeEditComponent {
+export class StudentEditComponent {
     @ViewChild('modal2') modal!: ModalComponent;
     params: any = {};
     imageUrl: any;
@@ -59,18 +59,6 @@ export class EmployeeEditComponent {
     //     },
     //     notes: 'It was a pleasure working with you and your team. We hope you will keep us in mind for future freelance projects. Thank You!',
     // };
-    jenisKelaminOptions = [
-        { value: 1, label: 'Laki-laki' },
-        { value: 2, label: 'Perempuan' },
-    ];
-    status_nikahOptions = [
-        { value: 1, label: 'Lajang' },
-        { value: 2, label: 'Nikah' },
-    ];
-    statusOptions = [
-        { value: 1, label: 'Active' },
-        { value: 2, label: 'Pasive' },
-    ];
     currencyList = [
         'USD - US Dollar',
         'GBP - British Pound',
@@ -165,13 +153,9 @@ export class EmployeeEditComponent {
         );
     }
 
-    toggleDateField(field: string, event: any) {
-        this.params[field] = event ? 1 : 0;
-    }
-
 
     getEmployeeData(id: number): void {
-        this.dataMasterService.getEmployeebyId(id).subscribe((response) => {
+        this.dataMasterService.getMembersbyId(id).subscribe((response) => {
             this.params = response;
         });
     }
@@ -230,9 +214,9 @@ export class EmployeeEditComponent {
     save() {
         const id = this.route.snapshot.paramMap.get('id');
         if (id) {
-            this.dataMasterService.updateEmployee(+id, this.params).subscribe((response) => {
+            this.dataMasterService.updateMember(+id, this.params).subscribe((response) => {
                 console.log('Data berhasil diperbarui:', response);
-                this.router.navigate(['/apps/masterData/employee/list']);
+                this.router.navigate(['/apps/masterData/student/list']);
                 this.showMessage('Update Data Successful!', 'top-end', 'success');
             }, (error) => {
                 console.error('Error updating data', error);

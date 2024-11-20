@@ -1,0 +1,1168 @@
+<div>
+    <div class="flex flex-col gap-2.5 xl:flex-row">
+        <div class="panel flex-1 px-0 py-6 ltr:xl:mr-6 rtl:xl:ml-6">
+            <div class="justify-left flex flex-wrap px-4">
+                <div class="text-lg">Update Class</div>
+            </div>
+            <hr class="my-6 border-[#e0e6ed] dark:border-[#1b2e4b]" />
+            <div class="mt-8 px-4">
+                <div class="grid grid-cols-1 gap-6">
+                    <!-- Baris Pertama: Unit, PBN, Pendidikan -->
+                    <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div class="lg:w-1/4">
+                            <label for="code">Code</label>
+                            <input
+                                id="code"
+                                type="text"
+                                class="form-input flex-1"
+                                style="width: 95%"
+                                [(ngModel)]="params.code"
+                                placeholder="Enter Cafe"
+                            />
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="cafe">Cafe</label>
+                            <input
+                                id="cafe"
+                                type="text"
+                                class="form-input flex-1"
+                                style="width: 95%"
+                                [(ngModel)]="params.cafe"
+                                placeholder="Enter Cafe"
+                            />
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="metode">Method</label>
+                            <ng-select
+                                id="metode"
+                                [(ngModel)]="params.metode"
+                                placeholder="Select Method"
+                                class="custom-multiselect"
+                                style="width: 95%"
+                            >
+                                <ng-option [value]="'1'">Reguler</ng-option>
+                                <ng-option [value]="'2'">BinUM</ng-option>
+                                <ng-option [value]="'3'">BinSus</ng-option>
+                            </ng-select>
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="wasis" class="mb-0">WS</label>
+                            <ng-select
+                                id="wasis"
+                                [items]="userList"
+                                bindLabel="nama_lengkap"
+                                bindValue="id"
+                                [(ngModel)]="params.wasis"
+                                placeholder="Select WASIS"
+                                class="custom-multiselect"
+                                style="width: 95%"
+                            >
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div class="lg:w-1/4">
+                            <label for="hari">Day</label>
+                            <input
+                                id="hari"
+                                type="text"
+                                class="form-input flex-1"
+                                style="width: 95%"
+                                [(ngModel)]="params.hari"
+                                placeholder="Enter Cafe"
+                            />
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="jam">Time</label>
+                            <input
+                                id="jam"
+                                type="time"
+                                class="form-input flex-1"
+                                style="width: 95%"
+                                [(ngModel)]="params.jam"
+                                placeholder="Enter Time"
+                            />
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="intensitas">Intensitas</label>
+                            <input
+                                id="intensitas"
+                                type="text"
+                                class="form-input flex-1"
+                                style="width: 95%"
+                                [(ngModel)]="params.intensitas"
+                                placeholder="Enter Cafe"
+                            />
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="status">Status</label>
+                            <ng-select id="status" [(ngModel)]="params.status" placeholder="Select Status Aktif" class="custom-multiselect" style="width: 95%">
+                                <ng-option [value]="'1'">Active</ng-option>
+                                <ng-option [value]="'2'">Non-Active</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between px-4">
+                        <icon-menu-users class="mr-2 shrink-0 group-hover:!text-primary" />
+                        <div class="flex-shrink-0 text-sm">List Student Details</div>
+                        <div class="ml-4 flex-grow border-t border-[#e0e6ed] dark:border-[#1b2e4b]"></div>
+                    </div>
+                    <div class="datatable invoice-table">
+                        <div class="mb-4.5 flex flex-col gap-5 px-5 md:flex-row md:items-center">
+                            <div class="flex items-center gap-2">
+                                <button class="btn btn-primary gap-2" (click)="openAddModal()">
+                                    <icon-plus />
+                                    Add Student
+                                </button>
+                            </div>
+                            <div class="ltr:ml-auto rtl:mr-auto">
+                                <input [(ngModel)]="search" type="text" class="form-input" placeholder="Search..." />
+                            </div>
+                        </div>
+
+                        <ng-datatable
+                            #datatable
+                            [rows]="studentList"
+                            [columns]="cols"
+                            [hasCheckbox]="false"
+                            [sortable]="true"
+                            [search]="search"
+                            skin="whitespace-nowrap bh-table-hover"
+                            firstArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M13 19L7 12L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path opacity="0.5" d="M16.9998 19L10.9998 12L16.9998 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
+                            lastArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M11 19L17 12L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path opacity="0.5" d="M6.99976 19L12.9998 12L6.99976 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg> '
+                            previousArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M15 5L9 12L15 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
+                            nextArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M9 5L15 12L9 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
+                        >
+                            <ng-template slot="id_pbn" let-value="data">
+                                <span
+                                    class="badge"
+                                    [ngClass]="[value.id_pbn === 1 ? 'badge-outline-warning' : value.id_pbn === 2 ? 'badge-outline-info' :'badge-outline-info']"
+                                >
+                                    {{ value.id_pbn === 1 ? 'BT' : value.id_pbn === 2 ? 'A-1.1' : value.id_pbn === 3 ? 'BinSus': value.id_pbn}}
+                                </span>
+                            </ng-template>
+                            <ng-template slot="actions" let-value="data">
+                                <div class="flex items-center justify-center gap-4">
+                                    <button type="button" class="hover:text-danger" (click)="openUpdateModal(value.id)">
+                                        <icon-edit class="h-4.5 w-4.5" />
+                                    </button>
+                                    <button type="button" class="hover:text-danger" (click)="deleteRow(value.id)">
+                                        <icon-trash-lines />
+                                    </button>
+                                </div>
+                            </ng-template>
+                        </ng-datatable>
+                    </div>
+                    <modal #modalAdd class="extra-large-modal">
+                        <ng-template #modalHeader>
+                            <div>Add Student</div>
+                        </ng-template>
+                        <ng-template #modalBody>
+                            <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                <div class="lg:w-1/3" [hidden]="true">
+                                    <label for="id">ID</label>
+                                    <input id="id" type="text" class="form-input flex-1" style="width: 95%" [(ngModel)]="student.id" placeholder="Enter Cafe" />
+                                </div>
+                                <div class="lg:w-1/2" [hidden]="true">
+                                    <label for="id_class">Name Student</label>
+                                    <input
+                                        id="id_class"
+                                        type="text"
+                                        class="form-input flex-1"
+                                        style="width: 95%"
+                                        [(ngModel)]="student.id_class"
+                                        placeholder="Enter Name Student"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="w-full">
+                                    <label for="id_student" class="mb-0">Student</label>
+                                    <ng-select
+                                        id="id_student"
+                                        [items]="userList"
+                                        bindLabel="nama_lengkap"
+                                        bindValue="id"
+                                        [(ngModel)]="student.id_student"
+                                        (change)="changeStudent($event)"
+                                        placeholder="Select Student"
+                                        class="custom-multiselect"
+                                    >
+                                    </ng-select>
+                                </div>
+                                <div class="lg:w-1/2" [hidden]="true">
+                                    <label for="studentName">Name Student</label>
+                                    <input
+                                        id="studentName"
+                                        type="text"
+                                        class="form-input flex-1"
+                                        style="width: 95%"
+                                        [(ngModel)]="student.studentName"
+                                        placeholder="Enter Name Student"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="lg:w-1/3" [hidden]="true">
+                                    <label for="id_pbn">PBN</label>
+                                    <input
+                                        id="id_pbn"
+                                        type="text"
+                                        class="form-input flex-1"
+                                        style="width: 95%"
+                                        [(ngModel)]="student.id_pbn"
+                                        placeholder="Enter Name Student"
+                                        disabled
+                                    />
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template #modalFooter>
+                            <button type="button" (click)="modalAdd.close()" class="btn btn-outline-danger">Discard</button>
+                            <button
+                                type="submit"
+                                (click)="addClassDet()"
+                                class="btn btn-primary ltr:ml-4 rtl:mr-4"
+                            >
+                                Save
+                            </button>
+                        </ng-template>
+                    </modal>
+                    <modal #modalUpdate class="extra-large-modal">
+                        <ng-template #modalHeader>
+                            <div>Update Student</div>
+                        </ng-template>
+                        <ng-template #modalBody>
+                            <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                <div class="lg:w-1/3" [hidden]="true">
+                                    <label for="id">ID</label>
+                                    <input id="id" type="text" class="form-input flex-1" style="width: 95%" [(ngModel)]="student.id" placeholder="Enter Cafe" />
+                                </div>
+                                <div class="w-full">
+                                    <label for="id_student" class="mb-0">Student</label>
+                                    <ng-select
+                                        id="id_student"
+                                        [items]="userList"
+                                        bindLabel="nama_lengkap"
+                                        bindValue="id"
+                                        [(ngModel)]="student.id_student"
+                                        (change)="changeStudent($event)"
+                                        placeholder="Select Student"
+                                        class="custom-multiselect"
+                                    >
+                                    </ng-select>
+                                </div>
+                                <div class="lg:w-1/2" [hidden]="true">
+                                    <label for="studentName">Name Student</label>
+                                    <input
+                                        id="studentName"
+                                        type="text"
+                                        class="form-input flex-1"
+                                        style="width: 95%"
+                                        [(ngModel)]="student.studentName"
+                                        placeholder="Enter Name Student"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="lg:w-1/3" [hidden]="true">
+                                    <label for="id_pbn">PBN</label>
+                                    <input
+                                        id="id_pbn"
+                                        type="text"
+                                        class="form-input flex-1"
+                                        style="width: 95%"
+                                        [(ngModel)]="student.id_pbn"
+                                        placeholder="Enter Name Student"
+                                        disabled
+                                    />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="flex items-center justify-between px-4">
+                                <div class="flex-shrink-0 text-sm">A Satu-satu</div>
+                                <div class="ml-4 flex-grow border-t border-[#e0e6ed] dark:border-[#1b2e4b]"></div>
+                            </div>
+                            <div class="flex items-center justify-between px-4">
+                                <div class="flex-shrink-0 text-sm"></div>
+                                <button (click)="toggleForm()" class="ml-4 text-sm">{{ isCollapsed ? 'Expand' : 'Collapse' }}</button>
+                            </div>
+
+                            <div *ngIf="!isCollapsed" [@collapseExpandAnimation]>
+                                <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                    <div class="lg:w-1/5">
+                                        <label for="a1satu_m1">M1</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="a1satu_m1"
+                                                [(ngModel)]="student.a1satu_m1"
+                                                (ngModelChange)="toggleDateField('a1satu_m1', $event)"
+                                            />
+                                            <span
+                                                for="a1satu_m1"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/5">
+                                        <label for="a1satu_m2">M2</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="a1satu_m2"
+                                                [(ngModel)]="student.a1satu_m2"
+                                                (ngModelChange)="toggleDateField('a1satu_m2', $event)"
+                                            />
+                                            <span
+                                                for="a1satu_m2"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/5">
+                                        <label for="a1satu_m3">M3</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="a1satu_m3"
+                                                [(ngModel)]="student.a1satu_m3"
+                                                (ngModelChange)="toggleDateField('a1satu_m3', $event)"
+                                            />
+                                            <span
+                                                for="a1satu_m3"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/5">
+                                        <label for="a1satu_m4">M4</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="a1satu_m4"
+                                                [(ngModel)]="student.a1satu_m4"
+                                                (ngModelChange)="toggleDateField('a1satu_m4', $event)"
+                                            />
+                                            <span
+                                                for="a1satu_m4"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/5">
+                                        <label for="a1satu_m5">M5</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="a1satu_m5"
+                                                [(ngModel)]="student.a1satu_m5"
+                                                (ngModelChange)="toggleDateField('a1satu_m5', $event)"
+                                            />
+                                            <span
+                                                for="a1satu_m5"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.a1satu_m1}">
+                                        <label for="a1satu_m1_date">Date M1</label>
+                                        <input
+                                            id="a1satu_m1_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.a1satu_m1_date"
+                                        />
+                                    </div>
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.a1satu_m2}">
+                                        <label for="a1satu_m2_date">Date M2</label>
+                                        <input
+                                            id="a1satu_m2_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.a1satu_m2_date"
+                                        />
+                                    </div>
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.a1satu_m3}">
+                                        <label for="a1satu_m3_date">Date M3</label>
+                                        <input
+                                            id="a1satu_m3_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.a1satu_m3_date"
+                                        />
+                                    </div>
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.a1satu_m4}">
+                                        <label for="a1satu_m4_date">Date M4</label>
+                                        <input
+                                            id="a1satu_m4_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.a1satu_m4_date"
+                                        />
+                                    </div>
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.a1satu_m5}">
+                                        <label for="a1satu_m5_date">Date M5</label>
+                                        <input
+                                            id="a1satu_m5_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.a1satu_m5_date"
+                                        />
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                    <div class="lg:w-1/4">
+                                        <label for="a1satu_o">OL</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="a1satu_o"
+                                                [(ngModel)]="student.a1satu_o"
+                                                (ngModelChange)="toggleDateField('a1satu_o', $event)"
+                                            />
+                                            <span
+                                                for="a1satu_o"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/4" [ngClass]="{'invisible': !student.a1satu_o}">
+                                        <label for="a1satu_o_date">Date OL</label>
+                                        <input
+                                            id="a1satu_o_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.a1satu_o_date"
+                                        />
+                                    </div>
+                                    <div class="lg:w-1/4">
+                                        <label for="done_a1satu">DONE</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="done_a1satu"
+                                                [(ngModel)]="student.done_a1satu"
+                                                (ngModelChange)="toggleDateField('done_a1satu', $event)"
+                                            />
+                                            <span
+                                                for="done_a1satu"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/4" [ngClass]="{'invisible': !student.done_a1satu}">
+                                        <label for="done_a1satu_date">Date DONE</label>
+                                        <input
+                                            id="done_a1satu_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.done_a1satu_date"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="flex items-center justify-between px-4">
+                                <div class="flex-shrink-0 text-sm">A Satu-dua</div>
+                                <div class="ml-4 flex-grow border-t border-[#e0e6ed] dark:border-[#1b2e4b]"></div>
+                            </div>
+                            <div class="flex items-center justify-between px-4">
+                                <div class="flex-shrink-0 text-sm"></div>
+                                <button (click)="toggleForm2()" class="ml-4 text-sm">{{ isCollapsed2 ? 'Expand' : 'Collapse' }}</button>
+                            </div>
+                            <div *ngIf="!isCollapsed2" [@collapseExpandAnimation]>
+                                <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                    <div class="lg:w-1/5">
+                                        <label for="a1dua_m1">M1</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="a1dua_m1"
+                                                [(ngModel)]="student.a1dua_m1"
+                                                (ngModelChange)="toggleDateField('a1dua_m1', $event)"
+                                            />
+                                            <span
+                                                for="a1dua_m1"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/5">
+                                        <label for="a1dua_m2">M2</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="a1dua_m2"
+                                                [(ngModel)]="student.a1dua_m2"
+                                                (ngModelChange)="toggleDateField('a1dua_m2', $event)"
+                                            />
+                                            <span
+                                                for="a1dua_m2"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/5">
+                                        <label for="a1dua_m3">M3</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="a1dua_m3"
+                                                [(ngModel)]="student.a1dua_m3"
+                                                (ngModelChange)="toggleDateField('a1dua_m3', $event)"
+                                            />
+                                            <span
+                                                for="a1dua_m3"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/5">
+                                        <label for="a1dua_o">OL</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="a1dua_o"
+                                                [(ngModel)]="student.a1dua_o"
+                                                (ngModelChange)="toggleDateField('a1dua_o', $event)"
+                                            />
+                                            <span
+                                                for="a1dua_o"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/5">
+                                        <label for="ikr_1">IKR</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="ikr_1"
+                                                [(ngModel)]="student.ikr_1"
+                                                (ngModelChange)="toggleDateField('ikr_1', $event)"
+                                            />
+                                            <span
+                                                for="ikr_1"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/5">
+                                        <label for="been">BEEN</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="been"
+                                                [(ngModel)]="student.been"
+                                                (ngModelChange)="toggleDateField('been', $event)"
+                                            />
+                                            <span
+                                                for="been"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.a1dua_m1}">
+                                        <label for="a1dua_m1_date">Date M1</label>
+                                        <input
+                                            id="a1dua_m1_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.a1dua_m1_date"
+                                        />
+                                    </div>
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.a1dua_m2}">
+                                        <label for="a1dua_m2_date">Date M2</label>
+                                        <input
+                                            id="a1dua_m2_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.a1dua_m2_date"
+                                        />
+                                    </div>
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.a1dua_m3}">
+                                        <label for="a1dua_m3_date">Date M3</label>
+                                        <input
+                                            id="a1dua_m3_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.a1dua_m3_date"
+                                        />
+                                    </div>
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.a1dua_o}">
+                                        <label for="a1dua_o_date">Date OL</label>
+                                        <input id="a1dua_o_date" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="student.a1dua_o_date" />
+                                    </div>
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.ikr_1}">
+                                        <label for="ikr_1_date">Date IKR</label>
+                                        <input id="ikr_1_date" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="student.ikr_1_date" />
+                                    </div>
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.been}">
+                                        <label for="been_date">Date BEEN</label>
+                                        <input id="been_date" type="date" class="form-input flex-1" style="width: 95%" [(ngModel)]="student.been_date" />
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="flex items-center justify-between px-4">
+                                <div class="flex-shrink-0 text-sm">BPS 1</div>
+                                <div class="ml-4 flex-grow border-t border-[#e0e6ed] dark:border-[#1b2e4b]"></div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between px-4">
+                                <div class="flex-shrink-0 text-sm"></div>
+                                <button (click)="toggleForm2a()" class="ml-4 text-sm">{{ isCollapsed2a ? 'Expand' : 'Collapse' }}</button>
+                            </div>
+                            
+                            <div *ngIf="!isCollapsed2a" [@collapseExpandAnimation]>
+                                <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                    <div class="lg:w-1/5">
+                                        <label for="bps1a">THAHARAH</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="bps1a"
+                                                [(ngModel)]="student.bps1a"
+                                                (ngModelChange)="toggleDateField('bps1a', $event)"
+                                            />
+                                            <span
+                                                for="bps1a"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/5">
+                                        <label for="bps1b">SHOLAT</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="bps1b"
+                                                [(ngModel)]="student.bps1b"
+                                                (ngModelChange)="toggleDateField('bps1b', $event)"
+                                            />
+                                            <span
+                                                for="bps1b"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/5">
+                                        <label for="bps1c">ZIS</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="bps1c"
+                                                [(ngModel)]="student.bps1c"
+                                                (ngModelChange)="toggleDateField('bps1c', $event)"
+                                            />
+                                            <span
+                                                for="bps1c"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/5">
+                                        <label for="bps1d">SHAUM</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="bps1d"
+                                                [(ngModel)]="student.bps1d"
+                                                (ngModelChange)="toggleDateField('bps1d', $event)"
+                                            />
+                                            <span
+                                                for="bps1d"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/5">
+                                        <label for="bps1e">HAJI & UMROH</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="bps1e"
+                                                [(ngModel)]="student.bps1e"
+                                                (ngModelChange)="toggleDateField('bps1e', $event)"
+                                            />
+                                            <span
+                                                for="bps1e"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.bps1a}">
+                                        <label for="bps1a_date">Date THAHARAH</label>
+                                        <input
+                                            id="bps1a_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.bps1a_date"
+                                        />
+                                    </div>
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.bps1b}">
+                                        <label for="bps1b_date">Date SHOLAT</label>
+                                        <input
+                                            id="bps1b_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.bps1b_date"
+                                        />
+                                    </div>
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.bps1c}">
+                                        <label for="bps1c_date">Date ZIS</label>
+                                        <input
+                                            id="bps1c_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.bps1c_date"
+                                        />
+                                    </div>
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.bps1d}">
+                                        <label for="bps1d_date">Date SHAUM</label>
+                                        <input
+                                            id="bps1d_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.bps1d_date"
+                                        />
+                                    </div>
+                            
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.bps1e}">
+                                        <label for="bps1e_date">Date HAJI & UMROH</label>
+                                        <input
+                                            id="bps1e_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.bps1e_date"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                    <div class="lg:w-1/5">
+                                        <label for="bps1f">EPI</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="bps1f"
+                                                [(ngModel)]="student.bps1f"
+                                                (ngModelChange)="toggleDateField('bps1f', $event)"
+                                            />
+                                            <span
+                                                for="bps1f"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/5">
+                                        <label for="bps1g">AL-KABAIR</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="bps1g"
+                                                [(ngModel)]="student.bps1g"
+                                                (ngModelChange)="toggleDateField('bps1g', $event)"
+                                            />
+                                            <span
+                                                for="bps1g"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/5">
+                                        <label for="bps1h">MUNAKAHAT</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="bps1h"
+                                                [(ngModel)]="student.bps1h"
+                                                (ngModelChange)="toggleDateField('bps1h', $event)"
+                                            />
+                                            <span
+                                                for="bps1h"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/5">
+                                        <label for="bps1i">QURBAN</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="bps1i"
+                                                [(ngModel)]="student.bps1i"
+                                                (ngModelChange)="toggleDateField('bps1i', $event)"
+                                            />
+                                            <span
+                                                for="bps1i"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/5">
+                                        <label for="bps1j">AQIQAH</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="bps1j"
+                                                [(ngModel)]="student.bps1j"
+                                                (ngModelChange)="toggleDateField('bps1j', $event)"
+                                            />
+                                            <span
+                                                for="bps1j"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.bps1f}">
+                                        <label for="bps1f_date">Date EPI</label>
+                                        <input
+                                            id="bps1f_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.bps1f_date"
+                                        />
+                                    </div>
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.bps1g}">
+                                        <label for="bps1g_date">Date AL-KABAIR</label>
+                                        <input
+                                            id="bps1g_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.bps1g_date"
+                                        />
+                                    </div>
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.bps1h}">
+                                        <label for="bps1h_date">Date MUNAKAHAT</label>
+                                        <input
+                                            id="bps1h_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.bps1h_date"
+                                        />
+                                    </div>
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.bps1i}">
+                                        <label for="bps1i_date">Date QURBAN</label>
+                                        <input
+                                            id="bps1i_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.bps1i_date"
+                                        />
+                                    </div>
+                            
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.bps1j}">
+                                        <label for="bps1j_date">Date AQIQAH</label>
+                                        <input
+                                            id="bps1j_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.bps1j_date"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                    <div class="lg:w-1/5">
+                                        <label for="bps1k">MUAMALAH</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="bps1k"
+                                                [(ngModel)]="student.bps1k"
+                                                (ngModelChange)="toggleDateField('bps1k', $event)"
+                                            />
+                                            <span
+                                                for="bps1k"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/5">
+                                        <label for="bps1l">ATHIMAH</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="bps1l"
+                                                [(ngModel)]="student.bps1l"
+                                                (ngModelChange)="toggleDateField('bps1l', $event)"
+                                            />
+                                            <span
+                                                for="bps1l"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/5">
+                                        <label for="bps1m">TILAWAH QUR'AN</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="bps1m"
+                                                [(ngModel)]="student.bps1m"
+                                                (ngModelChange)="toggleDateField('bps1m', $event)"
+                                            />
+                                            <span
+                                                for="bps1m"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/5">
+                                        <label for="bps1n">FIQIH MAR'AH</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="bps1n"
+                                                [(ngModel)]="student.bps1n"
+                                                (ngModelChange)="toggleDateField('bps1n', $event)"
+                                            />
+                                            <span
+                                                for="bps1n"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/5">
+                                        <label for="done_bps1">LULUS BPS 1</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="done_bps1"
+                                                [(ngModel)]="student.done_bps1"
+                                                (ngModelChange)="toggleDateField('done_bps1', $event)"
+                                            />
+                                            <span
+                                                for="done_bps1"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.bps1k}">
+                                        <label for="bps1k_date">Date MUAMALAH</label>
+                                        <input
+                                            id="bps1k_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.bps1k_date"
+                                        />
+                                    </div>
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.bps1l}">
+                                        <label for="bps1l_date">Date ATHIMAH</label>
+                                        <input
+                                            id="bps1l_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.bps1l_date"
+                                        />
+                                    </div>
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.bps1m}">
+                                        <label for="bps1m_date">Date TILAWAH QUR'AN</label>
+                                        <input
+                                            id="bps1m_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.bps1m_date"
+                                        />
+                                    </div>
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.bps1n}">
+                                        <label for="bps1n_date">Date FIQIH MAR'AH</label>
+                                        <input
+                                            id="bps1n_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.bps1n_date"
+                                        />
+                                    </div>
+                            
+                                    <div class="lg:w-1/5" [ngClass]="{'invisible': !student.done_bps1}">
+                                        <label for="done_bps1_date">Date LULUS</label>
+                                        <input
+                                            id="done_bps1_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.done_bps1_date"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="flex items-center justify-between px-4">
+                                <div class="flex-shrink-0 text-sm">A Satu-tiga</div>
+                                <div class="ml-4 flex-grow border-t border-[#e0e6ed] dark:border-[#1b2e4b]"></div>
+                            </div>
+                            <div class="flex items-center justify-between px-4">
+                                <div class="flex-shrink-0 text-sm"></div>
+                                <button (click)="toggleForm3()" class="ml-4 text-sm">{{ isCollapsed3 ? 'Expand' : 'Collapse' }}</button>
+                            </div>
+                            <div *ngIf="!isCollapsed3" [@collapseExpandAnimation]>
+                                <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                    <div class="lg:w-1/6">
+                                        <label for="a1tiga">M</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="a1tiga"
+                                                [(ngModel)]="student.a1tiga"
+                                                (ngModelChange)="toggleDateField('a1tiga', $event)"
+                                            />
+                                            <span
+                                                for="a1tiga"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/6" [ngClass]="{'invisible': !student.a1tiga}">
+                                        <label for="a1tiga_date">Date M</label>
+                                        <input
+                                            id="a1tiga_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.a1tiga_date"
+                                        />
+                                    </div>
+                                    <div class="lg:w-1/6">
+                                        <label for="a1tiga_o">OL</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="a1tiga_o"
+                                                [(ngModel)]="student.a1tiga_o"
+                                                (ngModelChange)="toggleDateField('a1tiga_o', $event)"
+                                            />
+                                            <span
+                                                for="a1tiga_o"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/6" [ngClass]="{'invisible': !student.a1tiga_o}">
+                                        <label for="a1tiga_o_date">Date OL</label>
+                                        <input
+                                            id="a1tiga_o_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.a1tiga_o_date"
+                                        />
+                                    </div>
+                                    <div class="lg:w-1/6">
+                                        <label for="graduate_a1">Graduate</label>
+                                        <label class="relative h-6 w-12">
+                                            <input
+                                                type="checkbox"
+                                                class="custom_switch peer absolute z-10 h-full w-full cursor-pointer opacity-0"
+                                                id="graduate_a1"
+                                                [(ngModel)]="student.graduate_a1"
+                                                (ngModelChange)="toggleDateField('graduate_a1', $event)"
+                                            />
+                                            <span
+                                                for="graduate_a1"
+                                                class="outline_checkbox bg-icon block h-full rounded-full border-2 border-[#ebedf2] before:absolute before:bottom-1 before:left-1 before:h-4 before:w-4 before:rounded-full before:bg-[#ebedf2] before:bg-[url(/assets/images/close.svg)] before:bg-center before:bg-no-repeat before:transition-all before:duration-300 peer-checked:border-primary peer-checked:before:left-7 peer-checked:before:bg-primary peer-checked:before:bg-[url(/assets/images/checked.svg)] dark:border-white-dark dark:before:bg-white-dark"
+                                            ></span>
+                                        </label>
+                                    </div>
+                                    <div class="lg:w-1/6" [ngClass]="{'invisible': !student.graduate_a1}">
+                                        <label for="graduate_a1_date">Date Graduate</label>
+                                        <input
+                                            id="graduate_a1_date"
+                                            type="date"
+                                            class="form-input flex-1"
+                                            style="width: 95%"
+                                            [(ngModel)]="student.graduate_a1_date"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template #modalFooter>
+                            <button type="button" (click)="modalUpdate.close()" class="btn btn-outline-danger">Discard</button>
+                            <button
+                                type="submit"
+                                (click)="updateClassDet(student.id)"
+                                class="btn btn-primary ltr:ml-4 rtl:mr-4"
+                            >
+                                Update
+                            </button>
+                        </ng-template>
+                    </modal>
+                    <div class="mt-8 flex flex-wrap justify-center justify-center px-4">
+                        <button routerLink="/apps/training/class/list" type="button" class="btn btn-outline-dark gap-2">
+                            <icon-arrow-backward class="shrink-0 ltr:mr-2 rtl:ml-2" />
+                            Cancel
+                        </button>
+                        <span class="mx-4"></span>
+                        <button type="button" class="btn btn-success gap-2" (click)="updateClass()">
+                            <icon-save class="shrink-0 ltr:mr-2 rtl:ml-2" />
+                            Update
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+<div>
+    <div class="flex flex-col gap-2.5 xl:flex-row">
+        <div class="panel flex-1 px-0 py-6 ltr:xl:mr-6 rtl:xl:ml-6">
+            <div class="flex flex-wrap justify-left px-4">
+                <div class="text-lg">Add Class</div>
+            </div>
+            <hr class="my-6 border-[#e0e6ed] dark:border-[#1b2e4b]" />
+            <div class="mt-8 px-4">
+                <div class="grid grid-cols-1 gap-6">
+                    <!-- Baris Pertama: Unit, PBN, Pendidikan -->
+                    <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div class="lg:w-1/4">
+                            <label for="code">Code</label>
+                            <input
+                                id="code"
+                                type="text"
+                                class="form-input flex-1"
+                                style="width: 95%"
+                                [(ngModel)]="params.code"
+                                placeholder="Enter Cafe"
+                            />
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="cafe">Cafe</label>
+                            <input
+                                id="cafe"
+                                type="text"
+                                class="form-input flex-1"
+                                style="width: 95%"
+                                [(ngModel)]="params.cafe"
+                                placeholder="Enter Cafe"
+                            />
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="metode">Method</label>
+                            <ng-select
+                                id="metode"
+                                [(ngModel)]="params.metode"
+                                placeholder="Select Method"
+                                class="custom-multiselect"
+                                style="width: 95%"
+                            >
+                                <ng-option [value]="'1'">Reguler</ng-option>
+                                <ng-option [value]="'2'">BinUM</ng-option>
+                                <ng-option [value]="'3'">BinSus</ng-option>
+                            </ng-select>
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="wasis" class="mb-0">WS</label>
+                            <ng-select
+                                id="wasis"
+                                [items]="userList"
+                                bindLabel="nama_lengkap"
+                                bindValue="id"
+                                [(ngModel)]="params.wasis"
+                                placeholder="Select WASIS"
+                                class="custom-multiselect"
+                                style="width: 95%"
+                            >
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div class="lg:w-1/4">
+                            <label for="hari">Day</label>
+                            <input
+                                id="hari"
+                                type="text"
+                                class="form-input flex-1"
+                                style="width: 95%"
+                                [(ngModel)]="params.hari"
+                                placeholder="Enter Cafe"
+                            />
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="jam">Time</label>
+                            <input
+                                id="jam"
+                                type="time"
+                                class="form-input flex-1"
+                                style="width: 95%"
+                                [(ngModel)]="params.jam"
+                                placeholder="Enter Time"
+                            />
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="intensitas">Intensitas</label>
+                            <input
+                                id="intensitas"
+                                type="text"
+                                class="form-input flex-1"
+                                style="width: 95%"
+                                [(ngModel)]="params.intensitas"
+                                placeholder="Enter Cafe"
+                            />
+                        </div>
+                        <div class="lg:w-1/4">
+                            <label for="status">Status</label>
+                            <ng-select id="status" [(ngModel)]="params.status" placeholder="Select Status Aktif" class="custom-multiselect" style="width: 95%">
+                                <ng-option [value]="'1'">Active</ng-option>
+                                <ng-option [value]="'2'">Non-Active</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="mt-8 flex flex-wrap justify-center justify-center px-4">
+                        <button routerLink="/apps/training/class/list" type="button" class="btn btn-outline-dark gap-2">
+                            <icon-arrow-backward class="shrink-0 ltr:mr-2 rtl:ml-2" />
+                            Cancel
+                        </button>
+                        <span class="mx-4"></span>
+                        <button type="button" class="btn btn-success gap-2" (click)="save()">
+                            <icon-save class="shrink-0 ltr:mr-2 rtl:ml-2" />
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
