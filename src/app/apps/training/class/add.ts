@@ -29,6 +29,31 @@ export class ClassAddComponent {
         'EUR - Germany (Euro)',
         'TRY - Turkish Lira',
     ];
+    methodOptions = [
+        { value: 1, label: 'Reguler' },
+        { value: 2, label: 'BinUM' },
+        { value: 3, label: 'BinSus' },
+    ];
+    intensitasOptions = [
+        { value: 1, label: '1x/Pekan' },
+        { value: 2, label: '2x/Pekan' },
+        { value: 3, label: '1x/2 Pekan' },
+        { value: 4, label: '1x/Bulan' },
+        { value: 5, label: '> 2x/Pekan' },
+    ];
+    hariOptions = [
+        { value: 1, label: 'Ahad' },
+        { value: 2, label: 'Senin' },
+        { value: 3, label: 'Selasa' },
+        { value: 4, label: 'Rabu' },
+        { value: 5, label: 'Kamis' },
+        { value: 6, label: 'Jumat' },
+        { value: 7, label: 'Sabtu' },
+    ];
+    statusOptions = [
+        { value: 1, label: 'Active' },
+        { value: 2, label: 'Non-Active' },
+    ];
     selectedCurrency = 'USD - US Dollar';
     tax: number | undefined;
     discount: number | undefined;
@@ -42,7 +67,7 @@ export class ClassAddComponent {
     }
 
     getUser(): void {
-        this.dataMasterService.getMembers().subscribe(
+        this.dataMasterService.getEmployees().subscribe(
             (data) => {
                 this.userList = data;
                 console.log(this.userList);

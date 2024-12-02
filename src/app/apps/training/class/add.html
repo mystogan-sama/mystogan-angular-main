@@ -36,13 +36,13 @@
                             <ng-select
                                 id="metode"
                                 [(ngModel)]="params.metode"
+                                [items]="methodOptions"
+                                bindLabel="label"
+                                bindValue="value"
                                 placeholder="Select Method"
                                 class="custom-multiselect"
                                 style="width: 95%"
                             >
-                                <ng-option [value]="'1'">Reguler</ng-option>
-                                <ng-option [value]="'2'">BinUM</ng-option>
-                                <ng-option [value]="'3'">BinSus</ng-option>
                             </ng-select>
                         </div>
                         <div class="lg:w-1/4">
@@ -62,18 +62,21 @@
                     </div>
                     <div class="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
                         <div class="lg:w-1/4">
-                            <label for="hari">Day</label>
-                            <input
-                                id="hari"
-                                type="text"
-                                class="form-input flex-1"
-                                style="width: 95%"
+                            <label for="hari">Hari</label>
+                            <ng-select
+                                id="metode"
                                 [(ngModel)]="params.hari"
-                                placeholder="Enter Cafe"
-                            />
+                                [items]="hariOptions"
+                                bindLabel="label"
+                                bindValue="value"
+                                placeholder="Select Hari"
+                                class="custom-multiselect"
+                                style="width: 95%"
+                            >
+                            </ng-select>
                         </div>
                         <div class="lg:w-1/4">
-                            <label for="jam">Time</label>
+                            <label for="jam">Waktu</label>
                             <input
                                 id="jam"
                                 type="time"
@@ -85,20 +88,30 @@
                         </div>
                         <div class="lg:w-1/4">
                             <label for="intensitas">Intensitas</label>
-                            <input
-                                id="intensitas"
-                                type="text"
-                                class="form-input flex-1"
-                                style="width: 95%"
+                            <ng-select
+                                id="metode"
                                 [(ngModel)]="params.intensitas"
-                                placeholder="Enter Cafe"
-                            />
+                                [items]="intensitasOptions"
+                                bindLabel="label"
+                                bindValue="value"
+                                placeholder="Select Intensitas"
+                                class="custom-multiselect"
+                                style="width: 95%"
+                            >
+                            </ng-select>
                         </div>
                         <div class="lg:w-1/4">
                             <label for="status">Status</label>
-                            <ng-select id="status" [(ngModel)]="params.status" placeholder="Select Status Aktif" class="custom-multiselect" style="width: 95%">
-                                <ng-option [value]="'1'">Active</ng-option>
-                                <ng-option [value]="'2'">Non-Active</ng-option>
+                            <ng-select
+                                id="status"
+                                [(ngModel)]="params.status"
+                                [items]="statusOptions"
+                                bindLabel="label"
+                                bindValue="value"
+                                placeholder="Select Status Aktif"
+                                class="custom-multiselect"
+                                style="width: 95%"
+                            >
                             </ng-select>
                         </div>
                     </div>

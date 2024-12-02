@@ -10,6 +10,8 @@ import Swal from 'sweetalert2';
 export class ClassListComponent {
     members: any[] = [];
     member: any = {};
+    employees: any[] = [];
+    employee: any = {};
     pbn: any[] = [];
     pendidikan: any[] = [];
     role: any[] = [];
@@ -26,8 +28,7 @@ export class ClassListComponent {
     cols = [
         { field: 'cafe', title: 'Cafe' },
         { field: 'wasis', title: 'WASIS' },
-        { field: 'walas', title: 'WALAS' },
-        { field: 'trainer', title: 'Trainer' },
+        { field: 'status', title: 'STATUS' },
         { field: 'metode', title: 'Metode'},
         { field: 'actions', title: 'Actions', sort: false, headerClass: 'justify-center' },
     ];
@@ -35,6 +36,7 @@ export class ClassListComponent {
     ngOnInit(): void {
         this.getClass();
         this.getMembers()
+        this.getEmployees()
     }
 
     getClass(): void {
@@ -61,9 +63,26 @@ export class ClassListComponent {
         );
     }
 
+    getEmployees(): void {
+        this.dataMasterService.getEmployees().subscribe(
+            (data) => {
+                this.employees = data;
+                console.log(this.employees);
+            },
+            (error) => {
+                console.error('Error fetching employees', error);
+            }
+        );
+    }
+
     getMemberNameById(id: number): string {
         const member = this.members.find(member => member.id === id);
         return member ? member.nama_panggilan : 'Unknown';
+    }
+
+    getEmployeeNameById(id: number): string {
+        const employee = this.employees.find(employee => employee.id === id);
+        return employee ? employee.nama_panggilan : 'Unknown';
     }
 
     getPbn(): void {

@@ -59,6 +59,24 @@ export class StudentEditComponent {
     //     },
     //     notes: 'It was a pleasure working with you and your team. We hope you will keep us in mind for future freelance projects. Thank You!',
     // };
+    jenisKelaminOptions = [
+        { value: 1, label: 'Laki-laki' },
+        { value: 2, label: 'Perempuan' },
+    ];
+    status_nikahOptions = [
+        { value: 1, label: 'Lajang' },
+        { value: 2, label: 'Nikah' },
+    ];
+    segmenOptions = [
+        { value: 1, label: 'Mahasiswa' },
+        { value: 2, label: 'Pelajar' },
+        { value: 3, label: 'Santri' },
+        { value: 4, label: 'Umum' },
+    ];
+    statusOptions = [
+        { value: 1, label: 'Active' },
+        { value: 2, label: 'Pasive' },
+    ];
     currencyList = [
         'USD - US Dollar',
         'GBP - British Pound',

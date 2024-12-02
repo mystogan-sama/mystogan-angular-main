@@ -59,6 +59,7 @@ export class ClassEditComponent {
     selectedFile = null;
     desaList: any[] = [];
     userList: any[] = [];
+    employeeList: any[] = [];
     unitList: any[] = [];
     unit: any = {};
     pbnList: any[] = [];
@@ -75,6 +76,10 @@ export class ClassEditComponent {
     isCollapsed2 = true;
     isCollapsed2a = true;
     isCollapsed3 = true;
+    isCollapsedA2a = true;
+    isCollapsedA21 = true;
+    isCollapsedA22 = true;
+    isCollapsedA2b = true;
     private imageAddedListener: any;
     mask1 = [/\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
@@ -85,14 +90,37 @@ export class ClassEditComponent {
         private operationService: OperationsService,
         private dataIndonesiaService: DataIndonesiaService
     ) {}
+
+    methodOptions = [
+        { value: 1, label: 'Reguler' },
+        { value: 2, label: 'BinUM' },
+        { value: 3, label: 'BinSus' },
+    ];
+    intensitasOptions = [
+        { value: 1, label: '1x/Pekan' },
+        { value: 2, label: '2x/Pekan' },
+        { value: 3, label: '1x/2 Pekan' },
+        { value: 4, label: '1x/Bulan' },
+        { value: 5, label: '> 2x/Pekan' },
+    ];
+    hariOptions = [
+        { value: 1, label: 'Ahad' },
+        { value: 2, label: 'Senin' },
+        { value: 3, label: 'Selasa' },
+        { value: 4, label: 'Rabu' },
+        { value: 5, label: 'Kamis' },
+        { value: 6, label: 'Jumat' },
+        { value: 7, label: 'Sabtu' },
+    ];
+    statusOptions = [
+        { value: 1, label: 'Active' },
+        { value: 2, label: 'Non-Active' },
+    ];
     @ViewChild('datatable') datatable: any;
     search = '';
     cols = [
         { field: 'studentName', title: 'Name' },
         { field: 'id_pbn', title: 'PBN' },
-        { field: 'walas', title: 'WALAS' },
-        { field: 'trainer', title: 'Trainer' },
-        { field: 'metode', title: 'Metode' },
         { field: 'actions', title: 'Actions', sort: false, headerClass: 'justify-center' },
     ];
     currencyList = [
@@ -145,12 +173,24 @@ export class ClassEditComponent {
         this.getPbn();
         this.getPendidikan();
         this.getStatus();
+        this.getEmployees();
     }
 
     getUser(): void {
         this.dataMasterService.getMembers().subscribe(
             (data) => {
                 this.userList = data;
+            },
+            (error) => {
+                console.error('Error fetching unit', error);
+            }
+        );
+    }
+
+    getEmployees(): void {
+        this.dataMasterService.getEmployees().subscribe(
+            (data) => {
+                this.employeeList = data;
             },
             (error) => {
                 console.error('Error fetching unit', error);
@@ -270,6 +310,22 @@ export class ClassEditComponent {
 
     toggleForm3() {
         this.isCollapsed3 = !this.isCollapsed3;
+    }
+
+    toggleForma2a() {
+        this.isCollapsedA2a = !this.isCollapsedA2a;
+    }
+
+    toggleForma21() {
+        this.isCollapsedA21 = !this.isCollapsedA21;
+    }
+
+    toggleForma22() {
+        this.isCollapsedA22 = !this.isCollapsedA22;
+    }
+
+    toggleForma2b() {
+        this.isCollapsedA2b = !this.isCollapsedA2b;
     }
 
     toggleDateField(field: string, event: any) {
