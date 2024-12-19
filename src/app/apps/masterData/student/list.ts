@@ -16,6 +16,7 @@ export class StudentListComponent {
     status: any[] = [];
     unit: any[] = [];
     users: any[] = [];
+    params: any = {};
 
     constructor(private dataMasterService: DataMasterService) {}
     @ViewChild('datatable') datatable: any;
@@ -142,6 +143,7 @@ export class StudentListComponent {
 
     ngOnInit(): void {
         this.getMembers();
+        this.getPbn()
     }
 
     getMembers(): void {
